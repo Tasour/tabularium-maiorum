@@ -18,6 +18,67 @@
 ancêtres. Tabularium Maiorum est l'atelier où l'on rassemble les traces laissées par les siens, où on les lit, où on
 les recoupe, et d'où l'on reconstruit leur histoire. Au quotidien, on dit simplement **Tabularium**.
 
+---
+
+## Fork Tassier & Reymond — source de vérité de l'arbre familial
+
+Ce fork contient l'intégralité de l'arbre **Tassier & Reymond**, migré depuis
+`~/Projects/arbre-genealogique-tassier` (décision du 21/11/2026 : Tabularium devient la source de
+vérité ; l'ancien `index.html` est archivé en lecture seule). Licence **AGPL-3.0 assumée** : ce fork
+et ses modifications restent sous AGPL s'ils sont publiés.
+
+### Ce qui a été importé
+
+| Donnée | Volume | Table Tabularium |
+| --- | --- | --- |
+| Fiches établies | 34 | `individu` (ids `tas-*`) |
+| Ancêtres Geneanet non raccordés | 653 | `individu` (ids `tas-pz-*`, grade `C3`, `raccorde=false`) |
+| Filiations | 36 | `filiation` (avec `acte_id` quand un acte l'établit) |
+| Hypothèses de parenté | 8 liens | `filiation` de type `hypothetique`, **jamais promues** |
+| Preuves numérisées + SHA-256 | 4 | `source` / `page` / `acte` / `lien` |
+| Enquêtes | 39 | `tache` / `consultation` |
+| Témoignages `A1-témoin` | 3 | `verdict` |
+| Doute H0 explicite | 1 | `doute` (`differentes`) |
+
+### Règles non négociables conservées
+
+- **H0 — homonymie conservée** : Jean Félicien (Lyon 1898) et Félicien Léon (Anor 1896) sont deux
+  fiches distinctes, avec un `doute` explicite. Aucune fusion sans verdict `A1-témoin`.
+- **C3 jamais promu** : les 653 ancêtres n'ont aucune filiation et ne sont jamais raccordés automatiquement.
+- **Aucune cote, date ou nom inventé** : les champs absents restent vides ; le sexe non renseigné
+  n'est pas deviné.
+- **RGPD strict** : aucune coordonnée personnelle.
+- **Traçabilité** : chaque preuve porte son empreinte SHA-256 dans `page.sha256`, vérifiée à l'import.
+- **Doublons** : Tabularium signale ~1 465 « doublons possibles » parmi les 687 individus (surtout
+  les C3). Ce sont des **suggestions** : aucune fusion n'est automatique, conformément à H0.
+
+### Champs ajoutés au schéma (migration `0014_import_tassier.sql`)
+
+- `page.sha256` — empreinte de l'image
+- `individu.grade` — grade Admiralty (`A1`, `B`, `C3`)
+- `individu.raccorde` — `true` uniquement si une filiation est établie par acte
+- `verdict` — témoignages datés du détenteur de l'arbre
+
+### Reproduire l'import
+
+```bash
+bun install
+bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
+bun test                               # 213 tests, 0 skippé
+bun run type-check
+bun run local                          # http://localhost:3210
+```
+
+L'export figé est versionné dans `scripts/donnees/arbre-export.json`. Le script le relit à chaque
+exécution ; tous les identifiants sont déterministes et les insertions idempotentes. Les tests
+`tests/import-tassier.test.ts` régénèrent leur propre base temporaire et vérifient 11 invariants
+(volumes, SHA-256, H0, non-promotion des C3, fidélité des cotes).
+
+Le fichier `tabularium.ini` désactive la vérification de mise à jour : l'arbre fonctionne sans appel
+réseau externe.
+
+---
+
 ![L'accueil : l'état de la recherche en un coup d'œil](docs/captures/accueil.webp)
 
 ## Pourquoi cet outil

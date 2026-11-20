@@ -61,6 +61,8 @@ export const page = sqliteTable("page", {
   largeur: integer("largeur").notNull(),
   hauteur: integer("hauteur").notNull(),
   numeroVue: text("numero_vue"),
+  /** Empreinte du fichier image (import Tassier & Reymond). */
+  sha256: text("sha256"),
   notes: text("notes"),
   creeLe: creeLe(),
 });
@@ -133,6 +135,10 @@ export const individu = sqliteTable("individu", {
   acteNaissanceId: text("acte_naissance_id").references(() => acte.id, { onDelete: "set null" }),
   acteDecesId: text("acte_deces_id").references(() => acte.id, { onDelete: "set null" }),
   profession: text("profession"),
+  /** Grade Admiralty de la preuve (import Tassier & Reymond) : A1, A2, B, C3. */
+  grade: text("grade").notNull().default("C3"),
+  /** Vrai uniquement si une filiation est établie par acte. Les 653 C3 restent faux. */
+  raccorde: integer("raccorde", { mode: "boolean" }).notNull().default(false),
   /** Parent déclaré inconnu dans les actes (≠ pas encore trouvé). */
   pereInconnu: integer("pere_inconnu", { mode: "boolean" }).notNull().default(false),
   mereInconnue: integer("mere_inconnue", { mode: "boolean" }).notNull().default(false),
@@ -332,6 +338,27 @@ export type Filiation = typeof filiation.$inferSelect;
 export type Tache = typeof tache.$inferSelect;
 export type Consultation = typeof consultation.$inferSelect;
 export type Doute = typeof doute.$inferSelect;
+
+/**
+ * Verdict de confiance (import Tassier & Reymond) : un témoignage daté qui autorise
+ * la promotion d'une hypothèse (proposedParents) en filiation établie.
+ * Règle H0 : sans verdict, un rattachement reste un doute et n'est jamais promu.
+ */
+export const verdict = sqliteTable(
+  "verdict",
+  {
+    id: id(),
+    cibleId: text("cible_id").notNull().references(() => individu.id, { onDelete: "cascade" }),
+    titre: text("titre").notNull(),
+    temoin: text("temoin").notNull(),
+    date: text("date").notNull(),
+    action: text("action").notNull(),
+    note: text("note"),
+    creeLe: creeLe(),
+  },
+  (t) => [index("verdict_cible_idx").on(t.cibleId), index("verdict_date_idx").on(t.date)],
+);
+export type Verdict = typeof verdict.$inferSelect;
 
 /** Journal des modifications : une ligne par action d'écriture (fonction appelée, par qui, sur quoi). */
 export const journal = sqliteTable(

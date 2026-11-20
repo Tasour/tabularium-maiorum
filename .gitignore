@@ -35,3 +35,6 @@ deploiement-perso*
 
 # Paquets de la version ordinateur (bun run paquets-locaux)
 /paquets/
+
+# Captures de preuve visuelle (non versionnées)
+/screens/
