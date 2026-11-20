@@ -1,0 +1,60 @@
+# Enquête 96 — Détail du recensement de Tigny en 1946 (954W 184) : ménage Delphine Favre + 5 enfants localisé au grade A1, filiation non établie — H0 conservée
+
+**Date :** 19/11/2026 · **Date d'arrêt des preuves :** 19/11/2026 · **Grade global :** **A1** pour le détail du recensement de La Chapelle / Tigny en 1946 (**954W 184**) — composition et localisation du ménage —, **non établi / non trouvé** pour la filiation (le recensement n'est pas un acte d'état civil) · **Conclusion :** **composition confirmée au grade A1, filiation non trouvée — H0 conservée, H3 retenue sur le lien juridique** ; aucun nom, prénom, date, lieu, cote ni URL inventé, aucune coordonnée reproduite.
+
+> Question fermée · passe 7 · entrée 96 de `PROCHAINES-100-ENQUETES.md` (groupe C, ascendance maternelle Reymond/Favre, 91-110) · suite directe de `ENQUETE-06.md` (ménage de Tigny), `GEN3-05-fratrie-favre.md` (§1, §3 F-1, §5) et `GEN3-10-graphe.md`, et voisine de `ENQUETE-92.md` (maternité sur acte) et `ENQUETE-94.md` (acte de naissance de Delphine) · livrable unique `ENQUETE-96.md`.
+> Règle appliquée : H0 = homonymie / non-rattachement ; la charge de la preuve pèse sur H1 (filiation lue sur un acte) ; « non trouvé » plutôt qu'une approximation ; cote ou URL + date de consultation + grade Admiralty (A–F, 1–6) par source ; **un recensement donne une co-résidence et des âges déclarés, jamais une filiation** ; aucune fusion, aucun lien de parenté inscrit dans le graphe.
+
+## Question fermée
+
+**Le détail du recensement de La Chapelle (Savoie), section de Tigny, en 1946 (954W 184), établit-il (a) la composition du ménage de Delphine Favre — elle-même et ses cinq enfants Marie, François, Julien, Joséphine et Jeanne — et (b) le lien de filiation mère-enfant, ainsi que l'identité du père ?** Une seule réponse, en deux temps : **(a) oui, au grade A1, pour la composition et la localisation ; (b) non pour la filiation et le père — non vérifiable par cette source.** Le recensement porte « Delphine Favre, cheffe de ménage » avec « ses enfants » et des **années déclarées** (1932, 1934, 1935, 1938, 1941) : c'est une photographie de co-résidence à Tigny, **pas un acte d'état civil** et pas une mention de parenté juridique.
+
+Test discriminant : le **nom de la mère tel qu'inscrit dans un acte de naissance** (prioritairement Joséphine Juliette Favre, 20/11/1938, désignée par 3E 4675). Le détail du recensement confirme qui vit sous le même toit en 1946 ; il ne dit pas « mère de », ne nomme pas le père (absent du ménage) et ne donne pas de dates d'acte. La maternité, le père et la remontée à Delphine sont traités ailleurs (`ENQUETE-06.md`, `#92`, `#93`, `#94`) et ne sont pas l'objet de cette enquête.
+
+## Hypothèses (H0–H3)
+
+| Hypothèse | Énoncé | Statut en fin d'enquête |
+| --- | --- | --- |
+| **H0** | Homonymie / non-rattachement : le détail du recensement n'établit qu'une co-résidence à Tigny en 1946 ; la mention « ses enfants » est une rubrique de ménage, pas une filiation ; aucun lien juridique n'est démontré et le père reste non identifié. | **Conservée** (hypothèse nulle, non réfutée faute d'acte lu) |
+| **H1** | Le détail du recensement porte une mention de filiation explicite et suffisante (« mère de », nom du père) permettant d'inscrire le lien dans le graphe. | **Non vérifiée / écartée comme source de filiation** : le libellé « ses enfants » et les âges déclarés ne font pas d'un recensement un acte de parenté |
+| **H2** | Dossier composite : le ménage de Tigny mêlerait des enfants issus de foyers Favre distincts (piège de 1931 : Joseph/Charlotte, Gaston, Lucien, Lucienne). | **Écartée pour 1931** (recensement distinct, A1) ; **non résolue** pour une naissance non recensée |
+| **H3** | Non résolu : composition et localisation établies au grade A1 ; filiation juridique, dates d'acte et identité du père non trouvés, faute d'actes consultés. | **Conclusion retenue** pour le lien de parenté |
+
+Hypothèses auxiliaires, **non** des faits de source : la mention « cheffe de ménage » décrit une situation de fait en 1946, pas un état civil ; les années 1932/1934/1935/1938/1941 sont des **années déclarées**, pas des dates d'acte ; la table **3E 4675** est exacte pour les naissances 1933-1942 mais **étrangère à tout libellé de filiation** ; le ménage Favre de 1931 est **écarté** pour homonymie. Aucun prior ni posterior chiffré n'est produit (pas de fausse précision).
+
+## Sources gradées (code Admiralty A–F, 1–6 · cote/URL · date)
+
+| ID | Source | Cote / URL | Date | Grade | Ce que ça apporte / limite |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Recensement de La Chapelle, 1946 — section de Tigny, détail du ménage Favre. | Archives de la Savoie, **954W 184** · `https://archives-numeriques.savoie.fr/ark:/77293/8ad58b695f5d1549` | 18-19/11/2026 | **A1** | **Prouve** : à Tigny, **Delphine Favre, cheffe de ménage née v. 1899**, avec « ses enfants » **Marie (1932), François (1934), Julien (1935), Joséphine (1938), Jeanne (1941)** ; localisation et composition du ménage. **Ne prouve pas** : la filiation, les dates exactes de naissance, ni le nom du père (absent du ménage). |
+| S2 | Âges / années déclarés et libellé « ses enfants » (extraits de S1). | **954W 184** (déclaration de recensement) | 18-19/11/2026 | **A1** pour la mention, **non établi** comme filiation | **Prouve** : des années déclarées et une rubrique de ménage. **Ne prouve pas** : « mère de », un acte, une parenté juridique — une déclaration de recensement n'est pas un acte d'état civil. |
+| S3 | Table décennale — naissances de La Chapelle 1933-1942 (contextuelle). | Archives de la Savoie, **3E 4675** · `https://archives-numeriques.savoie.fr/ark:/77293/8b287dff9745a43d3f7ecccf613f7e76` | 14/11/2026 | **A1** (index dérivé officiel) | **Prouve** : noms, prénoms et dates de François (23/04/1934), Julien (06/12/1935), Joséphine (20/11/1938), Jeanne (01/09/1941). **Ne prouve pas** : la filiation — une table ne porte jamais le nom des parents ; Marie (1932) est hors période. |
+| S4 | Recensement de La Chapelle, 1931 — piège d'homonymie. | Archives de la Savoie, **6M 946** · `https://archives-numeriques.savoie.fr/ark:/77293/e9e109723c58320a` | 14/11/2026 | **A1** | **Prouve** : un ménage Favre distinct à Lyndran (Joseph ~1879, Charlotte ~1881, Gaston, Lucien, Lucienne) : **écarté**. **Ne prouve pas** : la famille de Joséphine ; sans incidence sur le détail de 1946. |
+| S5 | Archives de la Savoie — « Conseils complémentaires pour la recherche généalogique ». | `https://patrimoines.savoie.fr/web/psp_45869/recherche-genealogique-conseils-complementaires` | 18/11/2026 | **A1** (règle officielle) | **Prouve** : registres **3E 1 à 4169** numérisés ; **3E 4170 à 5292 non numérisés, sauf tables décennales** ; naissances communicables 75 ans (papier) / 100 ans (internet). Encadre la voie de demande d'acte. **Ne prouve pas** : la filiation. |
+| S6 | Archives de la Savoie — formulaire « Recevoir la copie d'un acte ». | `https://patrimoines.savoie.fr/web/psp_12377/recevoir-la-copie-d-un-acte` | 14/11/2026 | **A1** (institution officielle) | **Prouve** : voie officielle de demande de copie, y compris pour les fonds non numérisés. **Ne prouve pas** : l'acte. Aucune coordonnée reproduite. |
+| S7 | Fichier INSEE des décès (`deces.matchid.io`) — consultation de contrôle. | `https://deces.matchid.io/search?q=FAVRE%20La%20Chapelle%2073` | 14-18/11/2026 | **B1** (base dérivée) | Consultation non aboutie (accès obstructé) : **silence documentaire d'accès**, pas preuve négative ; sans effet sur le détail du recensement 1946. |
+| S8 | Travaux antérieurs du dépôt (analyse interne, non source d'acte). | `ENQUETE-06.md`, `ENQUETE-07.md`, `ENQUETE-25.md`, `ENQUETE-54.md`, `ENQUETE-92.md`, `ENQUETE-94.md`, `GEN3-04-josephine-parents.md`, `GEN3-05-fratrie-favre.md`, `GEN3-10-graphe.md` | 18-19/11/2026 | **C1** | **Prouvent** : l'état du raisonnement (ménage de Tigny connu, maternité probable mais non lue sur acte, père non identifié, H0 conservée, aucun rattachement inscrit). **Ne prouvent pas** : la filiation — elles ne remplacent pas l'acte. |
+
+Sources écartées / non reproduites : aucune adresse, téléphone, courriel, photo privée ni donnée sensible n'a été collecté ou reproduit. **Aucune cote complémentaire n'est avancée** : **954W 184**, **3E 4675** et **6M 946** sont des références déjà relevées, non des suppositions. Aucun contournement d'accès, de paywall ou de compte privé n'a été tenté.
+
+## Résultat
+
+- **`trouvé` (au grade A1 uniquement)** — la **composition et la localisation** : le détail de **954W 184** (S1, S2) porte Delphine Favre, cheffe de ménage née v. 1899, à Tigny, avec Marie (1932), François (1934), Julien (1935), Joséphine (1938), Jeanne (1941) ; la table **3E 4675** (S3) recoupe quatre dates. C'est une **co-résidence documentée**, pas une parenté juridique.
+- **`non trouvé`** — la **filiation mère-enfant**, les **dates exactes par acte**, le **nom du père** (absent du ménage, S1) et le **contenu des actes de naissance** (S3, non numérisés) : silence documentaire d'accès, **pas** preuve négative. Le ménage Favre de 1931 (S4) reste écarté pour homonymie.
+- **`hypothèse`** — la maternité de Delphine pour les cinq enfants reste **probable par recensement, non vérifiée par acte** ; H0 conservée, H1 écartée comme source de filiation, H2 écartée pour 1931 et non résolue pour le reste, **H3 retenue sur le lien juridique**. Aucun lien n'est inscrit dans le graphe ; aucun nom de parent n'est avancé.
+- **Conclusion** : **composition confirmée au grade A1, filiation non trouvée — H0 conservée.** Le détail du recensement 1946 doit être présenté comme la **source de référence de la composition du ménage de Tigny**, jamais comme la preuve d'un lien mère-enfant ni d'une ascendance.
+
+## Ce qui ferait changer la conclusion
+
+- **Établirait le lien (H1 par acte)** : la copie de l'acte de naissance de l'un des cinq — prioritairement Joséphine Juliette Favre (20/11/1938, désignée par 3E 4675) — nommant « FAVRE Delphine » comme mère, avec date, lieu et vue exacte : la maternité passerait du grade A1-inférentiel au grade A1 d'acte, permettant l'inscription du lien au chantier #10.
+- **Révèlerait H0 / H2** : un acte nommant une autre mère pour l'un des cinq, un rattachement au ménage Favre de 1931 (S4, écarté), ou une impossibilité chronologique entre les âges déclarés et un acte → réexamen de l'homonymie et du dossier composite.
+- **Lèverait partiellement H3** : un acte de mariage de Delphine nommant ses parents (`#94`) ou un acte de décès Favre à La Chapelle entre 1943 et 1946 nommant le père (`#93`) → remontée générationnelle, sans pour autant prouver ici la filiation des cinq enfants.
+- **Ne ferait pas changer la conclusion** : le détail du recensement seul (S1, S2), la table 3E 4675 seule (S3), la répétition de l'inférence « ses enfants », le silence de `deces.matchid.io` (S7) et les synthèses internes (S8).
+
+## Prochaine action concrète (cote ou démarche)
+
+1. **Consigner le détail de 954W 184** (composition du ménage de Tigny, âges déclarés, grade A1) dans `PISTE-THIERACHE.md` §5 comme **référence de localisation**, en précisant explicitement qu'il ne porte **ni filiation ni nom de père** et que les années 1932-1941 sont des déclarations, pas des dates d'acte.
+2. **Demander la copie intégrale** de l'acte de naissance de **Joséphine Juliette Favre, née le 20/11/1938 à La Chapelle (Savoie)**, registre désigné par **3E 4675**, via `https://patrimoines.savoie.fr/web/psp_12377/recevoir-la-copie-d-un-acte` (S6) ; relever la vue exacte et le nom de la mère tel qu'inscrit. Étendre ensuite aux quatre autres actes (1932 hors période de la table à localiser séparément).
+3. **Ne rien inscrire dans le graphe avant consultation des actes** (chantier #10) : maintenir les cinq personnes comme **fratrie documentée par recensement**, Delphine à `~1899`, parents « à identifier », père non nommé ; croiser le résultat avec `ENQUETE-06.md`, `ENQUETE-92.md`, `ENQUETE-94.md` et `GEN3-05-fratrie-favre.md` avant toute fusion.
+
+*Fin de l'enquête 96 — livrable unique `ENQUETE-96.md` ; aucun autre fichier du dépôt n'a été modifié.*

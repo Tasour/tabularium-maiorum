@@ -40,6 +40,29 @@ et ses modifications restent sous AGPL s'ils sont publiés.
 | Témoignages `A1-témoin` | 3 | `verdict` |
 | Doute H0 explicite | 1 | `doute` (`differentes`) |
 
+### Enrichissement du 21/11/2026
+
+- **159 rapports d'enquête** (`ENQUETE-01` à `159`, dont **120 absents de l'ancien index**) sont
+  importés comme tâches enrichies, avec le rapport markdown complet, le grade global et la
+  conclusion. « Non trouvé / non documenté / H0 conservée » reste `en_cours` : jamais promu en fait.
+- **558 consultations** reprennent les sources gradées (cotes, URLs, dates, grades Admiralty).
+- **13 relevés** extraits des 4 transcriptions, avec les graphies telles qu'écrites
+  (`[T]assier`, `[Petit ?]`) et les rôles d'acte ; 10 sont rattachés à une fiche existante.
+- **Dates d'actes corrigées** : ce sont les dates des actes (1889-02-11, 1896-09-29, 1925-09-04),
+  non la date de consultation. La vue 131 reste sans date (contexte, non preuve autonome).
+- **19 recherches liées à une fiche** : le « Journal des recherches » s'affiche enfin sur les
+  personnes concernées. Les cas ambigus restent non liés (ex. E99, père non identifié).
+- **15 hypothèses écartées** enregistrées comme verdicts `hypothese_ecartée`, datées et gradées —
+  distinctes des 3 témoignages `A1-témoin`.
+- **Badges de rigueur** dans l'interface : grade Admiralty, « C3 · non raccordé », acte à l'appui,
+  verdicts datés sur la fiche ; empreinte SHA-256 dans le panneau de l'acte.
+- **9 lieux géolocalisés** via `geo.api.gouv.fr` en une passe d'administration ; 5 restent sans
+  coordonnées (nom ambigu ou « à confirmer ») — aucune approximation. L'app reste utilisable
+  sans réseau.
+
+Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
+`bun scripts/geolocaliser-lieux.ts` (une seule fois).
+
 ### Règles non négociables conservées
 
 - **H0 — homonymie conservée** : Jean Félicien (Lyon 1898) et Félicien Léon (Anor 1896) sont deux
@@ -64,7 +87,8 @@ et ses modifications restent sous AGPL s'ils sont publiés.
 ```bash
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
-bun test                               # 213 tests, 0 skippé
+bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
+bun test                               # 220 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

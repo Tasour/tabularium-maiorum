@@ -73,6 +73,7 @@ export function PanneauActe({ acte, pageId }: Props) {
         <TextInput label="Cote" placeholder="3E 123/45" {...t("cote")} />
         {page && <NumeroVue key={page.id} pageId={page.id} initial={page.numeroVue} />}
       </SimpleGrid>
+      {page && <EmpreintePage sha={page.sha256} />}
 
       <Divider label="Liens internet" labelPosition="left" />
       {acte.liens.map((l) => (
@@ -83,6 +84,17 @@ export function PanneauActe({ acte, pageId }: Props) {
       <Divider />
       <Textarea label="Notes" autosize minRows={3} {...t("notes")} />
       <Trace creePar={acte.creePar} modifiePar={acte.modifiePar} modifieLe={acte.modifieLe} />
+    </Stack>
+  );
+}
+
+/** Empreinte de l'image importée : la preuve est datée et vérifiable, pas seulement citée. */
+function EmpreintePage({ sha }: { sha: string | null }) {
+  if (!sha) return null;
+  return (
+    <Stack gap={2}>
+      <Text size="xs" fw={600}>Empreinte SHA-256 — preuve vérifiée à l’import</Text>
+      <Text size="xs" style={{ fontFamily: "monospace", wordBreak: "break-all" }}>{sha}</Text>
     </Stack>
   );
 }

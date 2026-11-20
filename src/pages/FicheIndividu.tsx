@@ -23,6 +23,7 @@ import { SEXES, SIGNATURES, TYPES_FILIATION, libelle, nomComplet } from "../lib/
 import { ecrire } from "../lib/query";
 import { ModalFusion } from "./ModalFusion";
 import { DoutesFiche, ModalNouveauDoute } from "../components/Doutes";
+import { RigueurFiche } from "../components/RigueurFiche";
 import { SyntheseReleves } from "./SyntheseReleves";
 import { JournalRecherches } from "./JournalRecherches";
 import { ParcoursVie } from "../components/ParcoursVie";
@@ -149,6 +150,7 @@ function FicheComplete() {
           </Group>
         </Group>
         <DoutesFiche individuId={ind.id} />
+        <RigueurFiche ind={ind} />
         <ModalNouveauDoute individuId={ind.id} opened={nouveauDoute} onClose={() => setNouveauDoute(false)} />
         <ModalFusion
           cible={ind}

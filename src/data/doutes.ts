@@ -1,6 +1,6 @@
 import { and, eq, or } from "drizzle-orm";
 import { db, newId, query } from "../db/client";
-import { doute, individu, type Doute } from "../db/schema";
+import { doute, individu, verdict, type Doute } from "../db/schema";
 import { STATUTS_DOUTE, type StatutDoute } from "../lib/doutes";
 import { creerRecherche } from "./recherches";
 import { sansTrace, verifierVersion, versionDe } from "./version";
@@ -135,4 +135,12 @@ export async function creerRechercheDoute(id: string) {
   });
   await db.update(doute).set({ tacheId }).where(eq(doute.id, id));
   return tacheId;
+}
+
+/**
+ * Verdicts de rigueur enregistrés sur une fiche (import Tassier & Reymond) :
+ * témoignages A1-témoin et hypothèses écartées. Lecture seule.
+ */
+export async function verdictsIndividu(individuId: string) {
+  return db.select().from(verdict).where(eq(verdict.cibleId, individuId)).orderBy(verdict.date);
 }
