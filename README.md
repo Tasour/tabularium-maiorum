@@ -84,6 +84,22 @@ et ses modifications restent sous AGPL s'ils sont publiés.
 
 Scripts idempotents : `completer-fiches.ts`, `importer-urls-sources.ts`, `ajouter-antoine-meunier.ts`.
 
+### Correction des doublons possibles (21/11/2026)
+
+Le tableau de bord affichait **1 465 doublons possibles**. Cause racine : le champ Geneanet `d`
+des 653 ancêtres est une plage **naissance–décès** (`1830-1895`), anciennement importée comme une
+naissance floue de 65 ans — toute date du XIXᵉ siècle « correspondait ». Correctifs :
+
+- parseur dédié `scripts/lib/date-pz.ts` (8 tests) + passe idempotente `corriger-dates-pz.ts` pour
+  les fiches déjà importées ; la chaîne brute reste dans les notes ;
+- **C3 non raccordés exclus par défaut** de la détection (ils sont distincts par construction, H0),
+  avec un interrupteur « Comparer aussi les C3 » ;
+- seuil porté de **40 à 55** et **signal requis** (date, lieu ou parents) — un simple nom commun
+  ne suffit plus.
+
+Résultat mesuré : **0 doublon affiché par défaut**, **37** quand on active l'option C3 (au lieu de
+1 465). Aucune fusion automatique : les rares suggestions restent validées par une personne.
+
 ### Quick wins d'ergonomie
 
 - **Bandeau de charge** sur la liste des individus au-delà de 500 fiches, avec rappel H0/C3.
@@ -120,7 +136,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 254 tests, 0 skippé
+bun test                               # 266 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

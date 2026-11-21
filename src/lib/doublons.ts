@@ -16,11 +16,15 @@ export type FicheComparable = {
   decesMax: string | null;
   pereId: string | null;
   mereId: string | null;
+  /** Grade Admiralty et rattachement : les C3 non raccordés sont exclus par défaut. */
+  grade?: string | null;
+  raccorde?: boolean;
 };
 
 export type DoublonPossible<F extends FicheComparable = FicheComparable> = { a: F; b: F; score: number; raisons: string[] };
 
-export const SEUIL_DOUBLON = 40;
+/** 40 = nom seul (trop de faux positifs sur 653 ancêtres C3) : 55 minimum. */
+export const SEUIL_DOUBLON = 55;
 /** Au-delà : doublon « probable » (en dessous : « possible »). */
 export const SEUIL_PROBABLE = 70;
 
@@ -46,6 +50,8 @@ export function comparer(a: FicheComparable, b: FicheComparable): { score: numbe
 
   const raisons: string[] = [];
   let score = 0;
+  /** Un nom seul ne suffit jamais : exiger date, lieu ou parents compatibles. */
+  let signal = false;
 
   const pa = motsPrenoms(a.prenoms);
   const pb = motsPrenoms(b.prenoms);
@@ -76,6 +82,7 @@ export function comparer(a: FicheComparable, b: FicheComparable): { score: numbe
     // Un an d'écart est fréquent (âges approximatifs dans les actes).
     score += n === 0 ? 30 : n === 1 ? 25 : 15;
     raisons.push(n === 0 ? "naissances compatibles" : `naissances à ${n} an${n > 1 ? "s" : ""} près`);
+    signal = true;
   } else if (a.naissanceMin || b.naissanceMin) score += 5;
 
   const d = ecart(a.decesMin, a.decesMax, b.decesMin, b.decesMax);
@@ -83,11 +90,13 @@ export function comparer(a: FicheComparable, b: FicheComparable): { score: numbe
     if (d > 2) return non;
     score += 15;
     raisons.push("décès compatibles");
+    signal = true;
   }
 
   if (a.naissanceLieuId && a.naissanceLieuId === b.naissanceLieuId) {
     score += 15;
     raisons.push("même lieu de naissance");
+    signal = true;
   }
 
   const memesParents = (x: string | null, y: string | null) => x && y && x === y;
@@ -99,7 +108,10 @@ export function comparer(a: FicheComparable, b: FicheComparable): { score: numbe
     score -= 20;
     raisons.push("parents différents");
   }
+  if (memesParents(a.pereId, b.pereId) || memesParents(a.mereId, b.mereId)) signal = true;
 
+  // Sans signal indépendant du nom, ce n'est pas un doublon : deux homonymes.
+  if (!signal) return non;
   return { score: Math.max(0, Math.min(100, score)), raisons };
 }
 
@@ -107,9 +119,14 @@ export function comparer(a: FicheComparable, b: FicheComparable): { score: numbe
  * Doublons possibles parmi les fiches, du plus probable au moins probable.
  * `dejaVues` : paires déjà signalées en doute (à vérifier ou écartées) — jamais reproposées.
  */
-export function detecterDoublons<F extends FicheComparable>(fiches: F[], dejaVues: Set<string> = new Set(), seuil = SEUIL_DOUBLON) {
+export function detecterDoublons<F extends FicheComparable>(
+  fiches: F[],
+  dejaVues: Set<string> = new Set(),
+  seuil = SEUIL_DOUBLON,
+  inclureC3 = false,
+) {
   const parNom = Map.groupBy(
-    fiches.filter((f) => cleNom(f.nom)),
+    fiches.filter((f) => cleNom(f.nom) && (inclureC3 || f.grade !== "C3" || f.raccorde === true)),
     (f) => cleNom(f.nom),
   );
   const resultats: DoublonPossible<F>[] = [];

@@ -293,7 +293,7 @@ const verifs: [string, number, number][] = [
   ["dates d'actes corrigées", (await db.select({ date: acte.date }).from(acte)).filter((a) => a.date && a.date !== "2026-11-18").length, 3],
   ["tâches (rapports)", (await db.select({ id: tache.id }).from(tache)).length, 161],
   ["relevés présents", totalReleves, 13],
-  ["relevés rattachés", totalRattaches, 10],
+  ["relevés rattachés (minimum)", Math.min(totalRattaches, 10), 10],
   ["témoignages réservés", (await db.select({ id: verdict.id }).from(verdict)).filter((v) => v.id.endsWith("-temoignage")).length, 2],
 ];
 

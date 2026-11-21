@@ -18,6 +18,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { and, eq } from "drizzle-orm";
 
+import { parserDatesPZ } from "./lib/date-pz";
 import { ouvrirBase } from "../serveur/base";
 import { BASE_DONNEES, DOSSIER_IMAGES, DOSSIER_MIGRATIONS, preparerDossiers } from "../serveur/config";
 import { db } from "../src/db/client";
@@ -278,14 +279,16 @@ exportData.pz.persons.forEach((pzPers: any, i: number) => {
   const parts = nomComplet.trim().split(/\s+/);
   const nom = parts.pop() ?? "";
   const prenoms = parts.join(" ");
-  const naissance = pzPers.d ?? "";
-  const b = bornes(naissance);
+  // Le champ Geneanet `d` est une plage naissance–décès, pas une naissance floue.
+  const datesPZ = parserDatesPZ(pzPers.d);
   awaitInsert(individu, {
     id, nom, prenoms, sexe: pzPers.s === "F" ? "F" : null,
-    naissance: naissance || null, naissanceMin: b[0], naissanceMax: b[1],
+    naissance: datesPZ.naissance, naissanceMin: datesPZ.naissanceMin, naissanceMax: datesPZ.naissanceMax,
+    deces: datesPZ.deces, decesMin: datesPZ.decesMin, decesMax: datesPZ.decesMax,
     grade: "C3", raccorde: false,
     notes: [
       "Ancêtre Geneanet — non raccordé au graphe établi (H0 conservée).",
+      pzPers.d ? `Dates brutes Geneanet (telles qu'écrites) : ${pzPers.d}` : "",
       `Branche ${pzPers.b ?? "?"} · ${exportData.pz.branches.find((x: any) => x.branch === pzPers.b)?.surnames ?? ""}`,
       pzPers.n ? `Nom tel qu'affiché : ${pzPers.n}` : "",
       exportData.pz.urls[i] ? `Source : ${exportData.pz.urls[i]}` : "",

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import {
-  ActionIcon, Anchor, Badge, Box, Button, Group, Menu, Modal, Paper, SegmentedControl, SimpleGrid, Stack, Text, Textarea, Tooltip,
+  ActionIcon, Anchor, Badge, Box, Button, Group, Menu, Modal, Paper, SegmentedControl, SimpleGrid, Stack, Switch, Text, Textarea, Tooltip,
 } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { IconAlertTriangle, IconArrowMerge, IconCheck, IconDots, IconListSearch, IconRefresh, IconTrash, IconUsers } from "@tabler/icons-react";
@@ -17,7 +17,7 @@ import { ModalFusion } from "../pages/ModalFusion";
 import { Portrait } from "./Portrait";
 import { IndividuSelect, useIndividus, useNoms } from "./selects";
 import type { IndividuListe } from "../data/individus";
-import { clePaire, detecterDoublons, SEUIL_PROBABLE, type DoublonPossible } from "../lib/doublons";
+import { clePaire, detecterDoublons, SEUIL_DOUBLON, SEUIL_PROBABLE, type DoublonPossible } from "../lib/doublons";
 import { afficherDate } from "../lib/dates";
 
 const sansAccents = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
@@ -265,14 +265,14 @@ const resume = (i: IndividuListe): FicheResumee => ({
 });
 
 /** Doublons possibles détectés parmi les fiches, hors paires déjà signalées ou écartées. */
-export function useDoublonsPossibles() {
+export function useDoublonsPossibles(inclureC3 = false) {
   const { data: individus = [] } = useIndividus();
   const { data: doutes } = useQuery({ queryKey: ["doutes"], queryFn: listeDoutes });
   return useMemo(() => {
     if (!doutes) return [];
     const vues = new Set(doutes.map((d) => clePaire(d.a.id, d.b.id)));
-    return detecterDoublons(individus, vues);
-  }, [individus, doutes]);
+    return detecterDoublons(individus, vues, SEUIL_DOUBLON, inclureC3);
+  }, [individus, doutes, inclureC3]);
 }
 
 /** Une suggestion : les deux fiches, pourquoi, et quoi en faire. */
@@ -321,7 +321,8 @@ function SuggestionDoublon({ s }: { s: DoublonPossible<IndividuListe> }) {
 
 /** Suggestions de doublons, en tête de l'onglet Doutes. */
 function SuggestionsDoublons({ recherche }: { recherche: string }) {
-  const suggestions = useDoublonsPossibles();
+  const [inclureC3, setInclureC3] = useState(false);
+  const suggestions = useDoublonsPossibles(inclureC3);
   const [toutes, setToutes] = useState(false);
   const mots = sansAccents(recherche).split(/\s+/).filter(Boolean);
   const liste = suggestions.filter((s) => mots.every((m) => sansAccents(`${nomComplet(s.a)} ${nomComplet(s.b)}`).includes(m)));
@@ -329,11 +330,19 @@ function SuggestionsDoublons({ recherche }: { recherche: string }) {
   const visibles = toutes ? liste : liste.slice(0, 5);
   return (
     <Stack gap="sm" mb="md">
-      <Group gap="xs">
+      <Group gap="xs" wrap="wrap">
         <Text fw={600}>Doublons possibles détectés ({liste.length})</Text>
         <Text size="xs" c="dimmed">
-          même nom, prénoms et dates compatibles — à vérifier, fusionner ou écarter
+          nom + date, lieu ou parents compatibles — à vérifier avant toute fusion
         </Text>
+        <Tooltip label="Par défaut, les 653 ancêtres C3 non raccordés sont exclus : ils sont distincts par construction (H0).">
+          <Switch
+            size="xs"
+            label="Comparer aussi les C3"
+            checked={inclureC3}
+            onChange={(e) => { setInclureC3(e.currentTarget.checked); setToutes(false); }}
+          />
+        </Tooltip>
       </Group>
       {visibles.map((s) => (
         <SuggestionDoublon key={clePaire(s.a.id, s.b.id)} s={s} />

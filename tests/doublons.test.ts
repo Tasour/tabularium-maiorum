@@ -51,3 +51,32 @@ test("détection : triée par probabilité, sans les paires déjà vues", () => 
   const restants = detecterDoublons(fiches, new Set(["a|b", clePaire("c", "b")]));
   expect(restants.map((d) => clePaire(d.a.id, d.b.id))).toEqual(["a|c"]);
 });
+
+test("nom seul (score 40) n'est plus un doublon : signal requis", () => {
+  const a = f("a", "Tassier", "Jean");
+  const b = f("b", "Tassier", "Jean");
+  // Même prénom seul : rejeté, même si on abaisse artificiellement le seuil.
+  expect(comparer(a, b).score).toBe(0);
+  expect(detecterDoublons([a, b], new Set(), 40).length).toBe(0);
+});
+
+test("C3 non raccordés exclus par défaut, inclus sur demande", () => {
+  const a = f("a", "Tassier", "Félicien", { ...ne(1896), grade: "A1" });
+  const b = f("b", "Tassier", "Félicien", { ...ne(1896), grade: "C3", raccorde: false });
+  expect(detecterDoublons([a, b]).length).toBe(0);
+  expect(detecterDoublons([a, b], new Set(), 55, true).length).toBe(1);
+});
+
+test("C3 raccordé par acte reste comparable", () => {
+  const a = f("a", "Tassier", "Félicien", { ...ne(1896), grade: "C3", raccorde: true });
+  const b = f("b", "Tassier", "Félicien", { ...ne(1896), grade: "A1" });
+  expect(detecterDoublons([a, b]).length).toBe(1);
+});
+
+test("seuil par défaut relevé à 55", () => {
+  const a = f("a", "Tassier", "Jean", { ...ne(1800) });
+  const b = f("b", "Tassier", "Jean", { ...ne(1801) }); // 30 + 25 = 55
+  expect(detecterDoublons([a, b]).length).toBe(1);
+  const c = f("c", "Tassier", "Jean Baptiste", { ...ne(1800) }); // 30 + 30 = 60
+  expect(detecterDoublons([a, c]).length).toBe(1);
+});
