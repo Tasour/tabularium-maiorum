@@ -66,6 +66,31 @@ pour Arlette Roussette, Jean Reymond, Hélène Lamarque, Delphine Favre et José
 décès ne correspond aux cibles** (homonymes écartés, y compris 4 « Jean Reymond » nés vers 1936 mais
 décédés avant 2023). Silence documentaire d'accès — aucune promotion, H0 conservée.
 
+## 4bis. Décès B1 ajoutés (21/11/2026, ENQUETE-162)
+
+| Fiche | Décès ajouté | Source | Statut |
+|---|---|---|---|
+| Élie Tassier (Sosa 2 de la gen 3) | **28/02/1997, Maubeuge** | GénéaFrance + morts.fr (B1, même fonds INSEE) | Indice concordant avec la naissance 1923 ; acte non consulté |
+| Emmanuel Tassier | **2000, Maubeuge** | idem | Seule l'année est connue, aucun jour inventé |
+
+Ces décès comblent des cases, ils **n'établissent aucune filiation** (H0 conservée). Voir `docs/demandes-actes.md` pour les copies à demander.
+
+## 4ter. Les 9 verdicts à prendre (dans l'ordre de la numérotation Sosa)
+
+| Sosa | Personne | Gén. | Ce qui est établi | Ce qui reste à trancher |
+|---|---|---|---|---|
+| 16 | Firmin Léon Tassier | 5 | Acte `3 E 7213` (1896) : ses parents sont Pierre Joseph × Philomène | Filiation de Firmin ← Pierre Joseph/Philomène (E159) |
+| 17 | Aline Angèle Meunier | 5 | Acte 1889 : épouse de Firmin | Filiation d'Aline ← Antoine Joseph Meunier (E119) |
+| 32 | Pierre Joseph Tassier | 6 | Acte 1889 le nomme père de Firmin | Filiation ← Jean-Baptiste × Anne Joseph (E76) |
+| 33 | Philomène Decamps | 6 | Acte 1889 : décédée à Anor le 06/04/1879 | Ses propres parents (non documentés) |
+| 34 | Antoine Joseph Meunier | 6 | Acte 1889 : journalier, père d'Aline | Ses parents (E119) |
+| 64 | Jean-Baptiste Tassier | 7 | Table décennale (1791) | Filiation ← Lambert × Jeanne Catherine (E78) |
+| 65 | Anne Joseph Fontaine | 7 | Table décennale (1796) | Ses parents (non documentés) |
+| 128 | Lambert Joseph Tassier | 8 | Table décennale (1748) | Ses parents (E77 : coïncidence circulaire) |
+| 129 | Jeanne Catherine Fontaine | 8 | Table décennale (1753) | Ses parents (non documentés) |
+
+Chaque verdict se prend sur une pièce lue, **jamais** par déduction d'un nom ou d'une ressemblance. Les enquêtes correspondantes sont en « Intervention humaine ».
+
 ## 5. Ce qui a été fait sans intervention humaine (21/11/2026)
 
 - Les 161 enquêtes ont été classées : **158 intervention humaine**, **1 en cours** (garde non satisfaite), **2 trouvé**, **0 abandonné** (aucun rapport ne dit qu'il n'y a plus d'action) — voir `docs/classification-recherches.md`.

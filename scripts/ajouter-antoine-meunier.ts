@@ -7,11 +7,11 @@
  * sans verdict explicite du détenteur. Pas de doute d'identité : il n'existe
  * pas de second candidat « Antoine Meunier » dans les données.
  */
-import { and, eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { ouvrirBase } from "../serveur/base";
 import { BASE_DONNEES, DOSSIER_MIGRATIONS } from "../serveur/config";
 import { db } from "../src/db/client";
-import { filiation, individu } from "../src/db/schema";
+import { filiation, individu, releve } from "../src/db/schema";
 
 ouvrirBase(BASE_DONNEES, DOSSIER_MIGRATIONS);
 
@@ -39,5 +39,14 @@ if (!existe.length) {
   console.log("Filiation hypothétique créée : Aline Meunier ← Antoine Joseph Meunier (non promue).");
 } else {
   console.log("Filiation déjà présente, inchangée.");
+}
+// Rattache le relevé « père de l'épouse » de l'acte de 1889 à cette fiche,
+// pour que la création soit cohérente même sur une base régénérée de zéro.
+const orphelins = await db.select().from(releve).where(isNull(releve.individuId));
+for (const r of orphelins) {
+  if ((r.nomEcrit ?? "").toLowerCase().includes("antoine joseph meunier")) {
+    await db.update(releve).set({ individuId: ID }).where(eq(releve.id, r.id));
+    console.log(`Relevé ${r.id} rattaché à ${ID}.`);
+  }
 }
 console.log(`Fiche ${ID} : C3, raccorde=false, aucun doute d'identité créé.`);
