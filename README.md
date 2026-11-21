@@ -96,6 +96,14 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Conformité de l'import PZ (21/11/2026, E164)
+
+Les **17 437 px** de la capture Geneanet « Familles de Thiérache » ont été lus en **7 bandes de
+2 500 px**. Conclusion d'enquête : les 9 branches et les individus discriminants (A. Jean Le TASSIER
+~1550-1578, Firmin 1866-1948, Aline Meunier, Baptiste × Anne BAUDEZ, etc.) correspondent à nos 653 PZ.
+Deux conjoints en apparence absents existent sous d'autres graphies (`Marguerite BULTÉ`, `Marie N.
+épouse TASSIER`). **Aucun maillon manquant, aucune modification de l'atlas**, H0 conservée.
+
 ### Relecture intégrale de la capture MyHeritage (21/11/2026, E163)
 
 Les **28 800 px** de la capture archivée ont été découpés en **12 bandes de 2 400 px** et lues
@@ -265,7 +273,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 353 tests, 0 skippé
+bun test                               # 355 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
