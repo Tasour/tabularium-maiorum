@@ -17,12 +17,12 @@ for (const script of ["import-tassier.ts", "enrichir-tassier.ts", "classer-reche
 }
 ouvrirBase(join(DOSSIER, "donnees.db"), join(racine, "drizzle"));
 
-test("168 tâches classées : 164 intervention humaine, 2 en cours, 2 trouvé", async () => {
+test("169 tâches classées : 164 intervention humaine, 3 en cours, 2 trouvé", async () => {
   const taches = await db.select().from(tache);
-  expect(taches.length).toBe(168);
+  expect(taches.length).toBe(169);
   const compte = (s: string) => taches.filter((t) => t.statut === s).length;
   expect(compte("intervention_humaine")).toBe(164);
-  expect(compte("en_cours")).toBe(2);
+  expect(compte("en_cours")).toBe(3);
   expect(compte("trouve")).toBe(2);
   expect(compte("abandonne")).toBe(0);
 });

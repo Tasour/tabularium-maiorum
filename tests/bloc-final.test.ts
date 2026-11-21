@@ -52,6 +52,6 @@ test("H0 : aucun C3 promu, 1 seul en cours, 2 trouvé", async () => {
   expect(c3.length).toBe(653);
   expect(c3.every((i) => i.raccorde === false)).toBe(true);
   const statuts = await db.select().from(tache);
-  expect(statuts.filter((t) => t.statut === "en_cours").length).toBe(2);
+  expect(statuts.filter((t) => t.statut === "en_cours").length).toBe(3);
   expect(statuts.filter((t) => t.statut === "trouve").length).toBe(2);
 });

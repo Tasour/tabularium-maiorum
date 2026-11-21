@@ -1,0 +1,243 @@
+{
+  "schema": "annotations/1.0.0",
+  "id": "acte-1925",
+  "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+  "titre": "Naissance Arlette Hélène Tassier — Maubeuge, 04/09/1925",
+  "description": "Acte n° 358 du registre des naissances de Maubeuge (Archives du Nord, 3 E 10052, vue 94). L'image montre deux pages de registre : l'acte annoté est en HAUT À GAUCHE. Les autres actes visibles (n° 359, 245, 361) concernent d'autres enfants et ne doivent pas être rapportés à Arlette Hélène.",
+  "reference": "Archives du Nord — Maubeuge, naissances 1925, 3 E 10052, vue 94 ; ARK 08rl1bndf7vs ; fichier local preuves/maubeuge-1925-naissance-arlette-helene.jpg (3421 × 2492 px)",
+  "grade": "A1",
+  "regle": "H0 conservé : distinguer « lu sur l'acte », « déduit » et « non trouvé ». Aucune information n'est inventée ; la mention marginale incomplète n'est pas stabilisée.",
+  "lecture_reference": "« Le quatre septembre mil neuf cent vingt-cinq […] est née Arlette Hélène […] de Jean Félicien Tassier, né à Lyon (Rhône) le vingt trois septembre mil huit cent quatre-vingt-dix-huit […] et de Hélène Marie Alphonsine Lamarque, née à Cerfontaine (Nord) le quatre septembre mil huit cent quatre-vingt-dix-huit […] » ; en marge : « Marié à Maubeuge le … 195? avec Leroux Emile ».",
+  "pedagogie": {
+    "guidageLecture": {
+      "principe": "Repérer d'abord le numéro d'acte et la date pour éviter de lire l'acte voisin, puis parcourir l'acte de haut en bas, terminer par la marge et les absences.",
+      "ordre_recommande": [
+        "a1925-numero",
+        "a1925-date",
+        "a1925-enfant",
+        "a1925-pere",
+        "a1925-mere",
+        "a1925-date-acte",
+        "a1925-declarant",
+        "a1925-mention-marginale",
+        "a1925-elisee-absent",
+        "a1925-filiation-elisee",
+        "a1925-fratrie",
+        "a1925-acte-1927",
+        "a1925-mariage-a-confirmer"
+      ]
+    }
+  },
+  "annotations": [
+    {
+      "id": "a1925-numero",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 6.7,
+        "y": 10.9,
+        "w": 4.0,
+        "h": 1.6
+      },
+      "titre": "Le numéro de l'acte",
+      "texte": "Repérez « N° 358 » en marge, en haut à gauche : c'est le numéro de l'acte à lire, situé en haut de la page de gauche. Le « 5340 » en pied de colonne est une numérotation de vue, pas un second acte.",
+      "transcription": "N° 358",
+      "type": "lu",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-date",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 17.0,
+        "y": 8.6,
+        "w": 30.0,
+        "h": 3.0
+      },
+      "titre": "La date de naissance",
+      "texte": "Première ligne : « Le quatre septembre mil neuf cent vingt-cinq ». L'enfant est née le 04/09/1925. Ne confondez pas cette date avec « Dressé le cinq septembre 1925 », qui est la date de rédaction de l'acte.",
+      "transcription": "Le quatre septembre mil neuf cent vingt-cinq",
+      "type": "lu",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-enfant",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 20.0,
+        "y": 12.0,
+        "w": 13.0,
+        "h": 3.5
+      },
+      "titre": "Le prénom de l'enfant",
+      "texte": "Le nom de l'enfant est écrit en grandes lettres : « Arlette Hélène », du sexe féminin. C'est elle, et non Élisée, qui est l'objet de cet acte : toute lecture inverse serait une extrapolation.",
+      "transcription": "Arlette Hélène, du sexe féminin",
+      "type": "lu",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-pere",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 16.5,
+        "y": 14.5,
+        "w": 30.0,
+        "h": 4.5
+      },
+      "titre": "La ligne du père",
+      "texte": "« De Jean Félicien Tassier, né à Lyon (Rhône) le vingt trois septembre mil huit cent quatre-vingt-dix-huit, journalier ». Le père d'Arlette Hélène est nommé directement : c'est un fait lu, pas une déduction. L'acte ne dit pas qu'il est aussi le père d'Élisée.",
+      "transcription": "Jean Félicien Tassier, né à Lyon (Rhône) le 23/09/1898, journalier",
+      "type": "lu",
+      "confiance": 0.98
+    },
+    {
+      "id": "a1925-mere",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 16.5,
+        "y": 18.0,
+        "w": 30.0,
+        "h": 5.0
+      },
+      "titre": "La ligne de la mère",
+      "texte": "« Et de Hélène Marie Alphonsine Lamarque, née à Cerfontaine (Nord) le quatre septembre mil huit cent quatre-vingt-dix-huit, sans profession ». La mère d'Arlette Hélène est nommée directement. Née le 04/09/1898, même jour et même mois que sa fille, mais vingt-sept ans plus tôt.",
+      "transcription": "Hélène Marie Alphonsine Lamarque, née à Cerfontaine (Nord) le 04/09/1898",
+      "type": "lu",
+      "confiance": 0.98
+    },
+    {
+      "id": "a1925-date-acte",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 16.5,
+        "y": 23.5,
+        "w": 30.0,
+        "h": 3.0
+      },
+      "titre": "La date de rédaction",
+      "texte": "« Dressé le cinq septembre mil neuf cent vingt-cinq » : l'acte est rédigé le lendemain de la naissance. Cette date ne remplace pas celle du 04/09/1925.",
+      "transcription": "Dressé le cinq septembre mil neuf cent vingt-cinq",
+      "type": "lu",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-declarant",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 16.5,
+        "y": 25.5,
+        "w": 30.0,
+        "h": 4.0
+      },
+      "titre": "La formule de déclaration",
+      "texte": "On lit « sur la déclaration faite par le père ». Le texte ne répète pas le nom du déclarant : on le déduit du père nommé plus haut, Jean Félicien Tassier. Ce rapprochement est un raisonnement, pas une seconde mention du nom.",
+      "transcription": "heures sur la déclaration faite par le père",
+      "type": "déduit",
+      "confiance": 0.75
+    },
+    {
+      "id": "a1925-mention-marginale",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": 3.0,
+        "y": 12.5,
+        "w": 12.0,
+        "h": 5.0
+      },
+      "titre": "La mention marginale",
+      "texte": "Dans la colonne de gauche : « Marié à Maubeuge le … 195? avec Leroux Emile ». Jour et mois sont partiellement lisibles (le dossier relève « 11 mars »), l'année reste incomplète. Le conjoint se lit « Leroux Emile » sur l'image, mais le dossier signale aussi « Lerose » : aucune graphie n'est retenue comme certaine et aucune année n'est substituée au « ? ».",
+      "transcription": "Marié à Maubeuge le … 195? avec Leroux Emile",
+      "type": "lu",
+      "confiance": 0.92
+    },
+    {
+      "id": "a1925-elisee-absent",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": null,
+        "y": null,
+        "w": null,
+        "h": null
+      },
+      "titre": "Élisée absent de l'acte",
+      "texte": "On a regardé le corps de l'acte et la mention marginale : le prénom « Élisée » n'apparaît nulle part. Ce n'est pas une preuve négative : l'acte concerne la naissance d'Arlette Hélène en 1925, alors qu'Élisée est recherché né en 1927.",
+      "transcription": null,
+      "type": "non trouvé",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-filiation-elisee",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": null,
+        "y": null,
+        "w": null,
+        "h": null
+      },
+      "titre": "Pas de filiation avec Élisée",
+      "texte": "Dire que Jean Félicien Tassier et Hélène Lamarque sont les parents d'Élisée est une déduction conditionnelle : elle présuppose qu'Arlette Hélène et Élisée étaient frère et sœur, ce qui vient de la mémoire familiale et non de l'acte. Cet acte n'établit aucune filiation avec Élisée.",
+      "transcription": null,
+      "type": "déduit",
+      "confiance": 0.5
+    },
+    {
+      "id": "a1925-fratrie",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": null,
+        "y": null,
+        "w": null,
+        "h": null
+      },
+      "titre": "Le lien de fratrie non lu",
+      "texte": "L'acte ne dit pas qu'Arlette Hélène est la sœur d'Élisée. La fratrie est une déclaration familiale, à confirmer par l'acte de naissance d'Élisée (23/02/1927, Maubeuge). Non trouvé dans l'acte.",
+      "transcription": null,
+      "type": "non trouvé",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-acte-1927",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": null,
+        "y": null,
+        "w": null,
+        "h": null
+      },
+      "titre": "L'acte de 1927 à chercher",
+      "texte": "L'acte de naissance d'Élisée (23/02/1927, Maubeuge) n'est ni localisé ni consulté : non trouvé à ce jour. Son absence n'est pas une preuve négative mais un silence documentaire d'accès ; c'est la pièce à demander pour vérifier une éventuelle filiation.",
+      "transcription": null,
+      "type": "non trouvé",
+      "confiance": 1.0
+    },
+    {
+      "id": "a1925-mariage-a-confirmer",
+      "preuve_id": "maubeuge-1925-naissance-arlette-helene",
+      "zone": {
+        "x": null,
+        "y": null,
+        "w": null,
+        "h": null
+      },
+      "titre": "Mariage : année et nom à confirmer",
+      "texte": "Le « ? » de « 195? » reste illisible et le nom du conjoint hésite entre « Leroux » et « Lerose ». L'acte de mariage de Maubeuge (décennie 1950) n'a pas été consulté : ni l'année ni la graphie ne peuvent être fixées à partir de cette seule mention.",
+      "transcription": null,
+      "type": "non trouvé",
+      "confiance": 1.0
+    }
+  ],
+  "ceQueLActeNeProuvePas": [
+    "Il ne nomme pas Élisée Tassier : le prénom est absent du corps comme de la mention marginale.",
+    "Il n'établit aucune filiation entre Élisée et Jean Félicien Tassier ou Hélène Marie Alphonsine Lamarque : les parents nommés sont ceux d'Arlette Hélène uniquement.",
+    "Il ne prouve pas qu'Arlette Hélène était la sœur d'Élisée : ce lien vient de la mémoire familiale et reste à confirmer par l'acte de 1927.",
+    "Il ne donne pas l'année exacte du mariage (« 195? ») et ne stabilise pas le nom du conjoint (Leroux / Lerose).",
+    "Il ne prouve pas le mariage en lui-même (seule une mention marginale partielle), ni la descendance d'Arlette Hélène, ni son décès en 2022 (source externe).",
+    "Il ne documente aucun ascendant antérieur (Firmin Léon Tassier, Aline Angèle Meunier, etc.) : la mention « né à Lyon (Rhône) le 23/09/1898 » ne remonte pas au-delà du père."
+  ],
+  "resolution_lecture_2026-11-19": {
+    "statut": "DIVERGENCE TRANCHÉE PAR L’UTILISATEUR — « Tassier » confirmé",
+    "contexte": "Trois lectures automatisées indépendantes (18/11/2026) avaient proposé Gabourier / Cabourier et Gabourienne / Lamarque, entraînant une correction de l’arbre (commit 0c32d18).",
+    "decision": "Le 19/11/2026, l’utilisateur a fourni un grossissement de la ligne du nom et confirmé qu’il s’agit de « Tassier ». La lecture des agents est écartée.",
+    "action": "Correction Gabourier annulée le 19/11/2026 ; arbre rétabli à « Jean Félicien Tassier (Lyon 1898) / Hélène Marie Alphonsine Lamarque (Cerfontaine 1898) », proposedParents et liens paternal restaurés. La transcription de référence du présent fichier redevient la lecture faisant foi.",
+    "lecon": "La lecture cursive d’un nom de famille par plusieurs agents peut converger à tort ; le contrôle visuel par le détenteur de l’acte prévaut. Aucune correction structurante du graphe ne doit être appliquée sans ce contrôle."
+  }
+}

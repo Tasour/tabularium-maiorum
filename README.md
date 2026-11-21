@@ -96,6 +96,18 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Mémoire de l'alerte 1925 (21/11/2026, E169)
+
+L'épisode fondateur de l'arbre d'origine est archivé dans le fork : **trois lectures d'agents
+indépendantes avaient convergé à tort sur « Gabourier »**, une correction structurante avait été
+appliquée (commit `0c32d18`), puis le détenteur a fourni un **grossissement de l'image** et confirmé
+« **Tassier** », entraînant l'annulation de la correction. L'annotation `data/annotations/acte-1925.json`
+est conservée avec son SHA-256 (`4097ed37…`) et son champ `resolution_lecture_2026-11-19`.
+
+Le contrôle `scripts/verifier-ecritures-structurantes.ts` vérifie désormais : noms restaurés,
+**9 liens hypothétiques non promus**, **18 verdicts datés**, annotation intacte. Exécutable avant
+toute modification structurante — la leçon devient mécanique, pas seulement documentaire.
+
 ### Plan de lecture Trélon (21/11/2026, E168)
 
 L'enquête E81 (jamais intégrée) fournit les **3 registres numérisés** qui couvrent la période de la
@@ -304,7 +316,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 378 tests, 0 skippé
+bun test                               # 383 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
