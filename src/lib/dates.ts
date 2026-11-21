@@ -23,7 +23,20 @@ function plage(s: string): { min: string; max: string } | null {
   s = s.trim();
   const republicaine = plageRepublicaine(s);
   if (republicaine) return republicaine;
-  let m = s.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{3,4})$/);
+  // ISO 8601 : format native des bases importées (Tabularium, actes, verdicts).
+  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (m) {
+    const [a, mo, j] = [+m[1], +m[2], +m[3]];
+    if (mo < 1 || mo > 12 || j < 1 || j > finDeMois(a, mo)) return null;
+    return { min: iso(a, mo, j), max: iso(a, mo, j) };
+  }
+  m = s.match(/^(\d{4})-(\d{2})$/);
+  if (m) {
+    const [a, mo] = [+m[1], +m[2]];
+    if (mo < 1 || mo > 12) return null;
+    return { min: iso(a, mo, 1), max: iso(a, mo, finDeMois(a, mo)) };
+  }
+  m = s.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{3,4})$/);
   if (m) {
     const [j, mo, a] = [+m[1], +m[2], +m[3]];
     if (mo < 1 || mo > 12 || j < 1 || j > finDeMois(a, mo)) return null;

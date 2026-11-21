@@ -153,6 +153,15 @@ for (const [key, p] of Object.entries(exportData.people)) {
 
 // ---------- 3. preuves -> source / page / acte / lien -------------------------
 
+/** Types d'actes Tabularium (src/lib/libelles.ts) : jamais la nature brute de la source. */
+const TYPES_ACTE_IMPORT: Record<string, string> = {
+  "acte de mariage": "mariage",
+  "acte de naissance": "naissance",
+  "acte de décès": "deces",
+  "page de registre de naissances": "autre",
+  "table décennale": "autre",
+};
+
 const idSourcePreuve = new Map<string, string>();
 const idActePreuve = new Map<string, string>();
 for (const pr of exportData.preuves) {
@@ -180,7 +189,7 @@ for (const pr of exportData.preuves) {
   stats.pages++;
 
   awaitInsert(acte, {
-    id: acteId, sourceId: srcId, nature: "acte", type: pr.nature ?? null,
+    id: acteId, sourceId: srcId, nature: "acte", type: TYPES_ACTE_IMPORT[pr.nature] ?? "autre",
     numero: pr.titre.match(/n°\s*(\d+)/)?.[1] ?? null,
     date: pr.date ?? null, dateMin: pr.date ?? null, dateMax: pr.date ?? null,
     cote: pr.cote, titre: pr.titre, transcription: pr.transcription ?? null,

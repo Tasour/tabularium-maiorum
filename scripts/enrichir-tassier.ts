@@ -17,7 +17,7 @@ import { and, eq, isNull, sql } from "drizzle-orm";
 import { ouvrirBase } from "../serveur/base";
 import { BASE_DONNEES, DOSSIER_MIGRATIONS } from "../serveur/config";
 import { db } from "../src/db/client";
-import { acte, consultation, individu, releve, tache, verdict } from "../src/db/schema";
+import { acte, consultation, doute, filiation, individu, releve, tache, verdict } from "../src/db/schema";
 
 const RAPPORTS = join(import.meta.dir, "donnees", "rapports");
 /** Convention de l'index source : E01…E09 puis E10…E159. */
@@ -44,6 +44,19 @@ const DATES_ACTES: Record<string, { date: string | null }> = {
 for (const [id, v] of Object.entries(DATES_ACTES)) {
   await db.update(acte).set({ date: v.date, dateMin: v.date, dateMax: v.date }).where(eq(acte.id, id));
   stats.dates++;
+}
+
+// Types d'actes : normaliser les valeurs issues de l'ancien import (champ vide dans l'UI).
+const TYPES_ACTE: Record<string, string> = {
+  "acte de mariage": "mariage",
+  "acte de naissance": "naissance",
+  "acte de décès": "deces",
+  "page de registre de naissances": "autre",
+  "table décennale": "autre",
+};
+for (const a of await db.select().from(acte)) {
+  const normalise = TYPES_ACTE[a.type ?? ""];
+  if (normalise && normalise !== a.type) await db.update(acte).set({ type: normalise }).where(eq(acte.id, a.id));
 }
 
 // ---------- 2. rapports -> tâches ---------------------------------------------
@@ -283,6 +296,22 @@ const verifs: [string, number, number][] = [
   ["relevés rattachés", totalRattaches, 10],
   ["témoignages réservés", (await db.select({ id: verdict.id }).from(verdict)).filter((v) => v.id.endsWith("-temoignage")).length, 2],
 ];
+
+// Garde-fou H0 : aucun C3 promu, aucune filiation vers un ancêtre non raccordé, doute conservé.
+const apresIndividus = await db.select({ id: individu.id, raccorde: individu.raccorde, grade: individu.grade }).from(individu);
+const c3Promus = apresIndividus.filter((i) => i.id.startsWith("tas-pz-") && i.raccorde).length;
+const liensC3 = (await db.select().from(filiation)).filter((l) => l.enfantId.startsWith("tas-pz-") || l.parentId.startsWith("tas-pz-")).length;
+const douteH0 = (await db.select().from(doute)).filter((d) => d.statut === "differentes" &&
+  [d.individu1Id, d.individu2Id].includes("tas-jean_felicien") &&
+  [d.individu1Id, d.individu2Id].includes("tas-felicien_leon")).length;
+const typesValides = new Set(["naissance", "bapteme", "mariage", "deces", "sepulture", "reconnaissance", "legitimation", "recensement", "matricule", "notarie", "autre", null]);
+const typesInvalides = (await db.select({ type: acte.type }).from(acte)).filter((a) => !typesValides.has(a.type)).length;
+verifs.push(
+  ["C3 promus (doit être 0)", c3Promus, 0],
+  ["filiations vers C3 (doit être 0)", liensC3, 0],
+  ["doute H0 Jean/Félicien", douteH0, 1],
+  ["types d'actes invalides (doit être 0)", typesInvalides, 0],
+);
 let echecs = 0;
 for (const [label, obtenu, attendu] of verifs) {
   const ok = obtenu === attendu;

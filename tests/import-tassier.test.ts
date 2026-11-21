@@ -116,3 +116,10 @@ const sourceData = JSON.parse(readFileSync(EXPORT, "utf8"));
     expect((await db.select().from(consultation).where(eq(consultation.resultat, "rien"))).length).toBeGreaterThan(0);
     expect(sourceData.enquetes.filter((e: any) => e.statut === "non-trouve").length).toBeGreaterThan(0);
   });
+
+test("types d'actes normalisés selon TYPES_ACTE (champ visible dans l'UI)", async () => {
+  const types = (await db.select({ type: acte.type }).from(acte)).map((a) => a.type);
+  const valides = new Set(["naissance", "bapteme", "mariage", "deces", "sepulture", "reconnaissance", "legitimation", "recensement", "matricule", "notarie", "autre", null]);
+  expect(types.every((t) => valides.has(t))).toBe(true);
+  expect(types.filter((t) => t === "naissance" || t === "mariage").length).toBe(3);
+});

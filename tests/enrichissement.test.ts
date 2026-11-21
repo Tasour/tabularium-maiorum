@@ -10,7 +10,7 @@ import { join } from "node:path";
 
 import { ouvrirBase } from "../serveur/base";
 import { db } from "../src/db/client";
-import { acte, consultation, filiation, individu, releve, tache, verdict } from "../src/db/schema";
+import { acte, consultation, doute, filiation, individu, releve, tache, verdict } from "../src/db/schema";
 
 const DOSSIER = mkdtempSync(join(tmpdir(), "tassier-enrich-"));
 const racine = join(import.meta.dir, "..");
@@ -118,4 +118,18 @@ test("E160/E161 : témoignages A1-témoin réservés, H0 conservée, aucun lien 
   expect(alceste.length).toBe(0);
   const parents = (await db.select().from(filiation)).filter((f) => f.enfantId === "tas-jean");
   expect(parents.length).toBe(0);
+});
+
+test("H0 garde-fou intégral : 0 C3 promu, 0 filiation C3, doute Jean/Félicien conservé", async () => {
+  const individus = await db.select().from(individu);
+  const c3 = individus.filter((i) => i.id.startsWith("tas-pz-"));
+  expect(c3.length).toBe(653);
+  expect(c3.every((i) => i.raccorde === false)).toBe(true);
+  const liens = await db.select().from(filiation);
+  const idsC3 = new Set(c3.map((i) => i.id));
+  expect(liens.filter((l) => idsC3.has(l.enfantId) || idsC3.has(l.parentId)).length).toBe(0);
+  const doutes = await db.select().from(doute);
+  expect(doutes.some((d) => d.statut === "differentes" &&
+    [d.individu1Id, d.individu2Id].includes("tas-jean_felicien") &&
+    [d.individu1Id, d.individu2Id].includes("tas-felicien_leon"))).toBe(true);
 });

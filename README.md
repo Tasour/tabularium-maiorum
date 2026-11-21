@@ -54,6 +54,11 @@ et ses modifications restent sous AGPL s'ils sont publiés.
   (`[T]assier`, `[Petit ?]`) et les rôles d'acte ; 10 sont rattachés à une fiche existante.
 - **Dates d'actes corrigées** : ce sont les dates des actes (1889-02-11, 1896-09-29, 1925-09-04),
   non la date de consultation. La vue 131 reste sans date (contexte, non preuve autonome).
+  Les dates ISO `AAAA-MM-JJ` sont désormais reconnues par les champs de saisie (plus d'alerte
+  « Format non reconnu ») ; les types d'actes sont normalisés vers `naissance` / `mariage` /
+  `autre`, valeurs attendues par l'interface.
+- **Garde-fou H0 vérifié à chaque import** : 0 C3 promu, 0 filiation vers un C3, doute Jean
+  Félicien / Félicien Léon conservé, 0 type d'acte invalide.
 - **19 recherches liées à une fiche** : le « Journal des recherches » s'affiche enfin sur les
   personnes concernées. Les cas ambigus restent non liés (ex. E99, père non identifié).
 - **15 hypothèses écartées** enregistrées comme verdicts `hypothese_ecartée`, datées et gradées —
@@ -92,7 +97,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 232 tests, 0 skippé
+bun test                               # 237 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
