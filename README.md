@@ -96,6 +96,18 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Divergences internes du graphe PZ (21/11/2026, E167)
+
+L'enquête E86 (jamais intégrée) est confirmée par nos propres données : **PZ 181 Pierre Joseph
+(1835-1892) et PZ 228 Théodule (1840-1886) sont tous deux déclarés fils de PZ 117 Jean-Baptiste
+(1791-1849)**. Notre chaîne Sosa 64→32 retient Pierre Joseph, mais ce choix est **circulaire** (la
+chaîne vient du même arbre) et aucun acte ne tranche. Un doute **`a_verifier`** rend l'alternative
+visible ; **aucun lien n'est modifié**.
+
+Le contrôle `docs/coherence-graphe-pz.md` signale **40 géniteurs à fratrie suspecte** (le champ `p`
+semble parfois mélanger filiation et alliance, ex. « Joseph FAUVET » compté comme enfant). Aucune
+correction automatique : grade C3, H0 conservée.
+
 ### Repères d'actes du Nord (21/11/2026, E166)
 
 Les 17 643 px de la capture Acte-Décès.fr lus en 7 bandes. **Grade B1** (dérivé INSEE, même fonds que
@@ -283,7 +295,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 363 tests, 0 skippé
+bun test                               # 374 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
