@@ -4,7 +4,7 @@
 
 ## Comptages
 
-- Intervention humaine : **160**
+- Intervention humaine : **161**
 - Abandonné : **0**
 - En cours (garde non satisfaite) : **2**
 - Trouvé (inchangé) : **2**
@@ -46,4 +46,4 @@
 - **tas-tache-E24** E24 — Jean Reymond, Chambéry 1936 — Action non automatisable restante : **Démarche prioritaire — demander la copie intégrale** de l'acte de naissance de **Jean Alceste Alfred Reymond, né le 21/04/1936 à Chambéry**, registre des naissances de Chambéry 1
 - **tas-tache-E25** E25 — Joséphine Favre, La Chapelle 1938 — Action non automatisable restante : Demander aux **Archives de la Savoie** la reproduction de l'acte de naissance désigné par la table **3E 4675** (La Chapelle, 20/11/1938), ou le consulter sur place, et relever la v
 
-_162 transition(s) appliquée(s) lors de cette exécution ; les autres étaient déjà classées._
+_163 transition(s) appliquée(s) lors de cette exécution ; les autres étaient déjà classées._

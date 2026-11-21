@@ -273,7 +273,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 355 tests, 0 skippé
+bun test                               # 359 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
