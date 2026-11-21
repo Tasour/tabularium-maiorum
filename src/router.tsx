@@ -6,6 +6,7 @@ import { Individus } from "./pages/Individus";
 import { FicheIndividu } from "./pages/FicheIndividu";
 import { Lieux } from "./pages/Lieux";
 import { Arbre } from "./pages/arbre/Arbre";
+import { Ascendance } from "./pages/Ascendance";
 import { Cartographie } from "./pages/cartographie/Cartographie";
 import { Photos } from "./pages/photos/Photos";
 import { Sauvegarde } from "./pages/Sauvegarde";
@@ -88,6 +89,12 @@ export const arbreRoute = createRoute({
     typeof s.racine === "string" ? { racine: s.racine } : {},
 });
 
+export const ascendanceRoute = createRoute({
+  getParentRoute: () => application,
+  path: "/ascendance",
+  component: Ascendance,
+});
+
 export const cartographieRoute = createRoute({
   getParentRoute: () => application,
   path: "/cartographie",
@@ -138,7 +145,7 @@ export const router = createRouter({
     connexionRoute,
     lienRoute,
     application.addChildren([
-      accueil, documents, presentation, calendrierRepublicain, archives, capturer, atelierRoute, registres, registreRoute, individus, ficheIndividuRoute, arbreRoute, cartographieRoute, photos, recherches,
+      accueil, documents, presentation, calendrierRepublicain, archives, capturer, atelierRoute, registres, registreRoute, individus, ficheIndividuRoute, arbreRoute, ascendanceRoute, cartographieRoute, photos, recherches,
       lieuxRoute, sauvegarde, comptes, journal,
     ]),
   ]),

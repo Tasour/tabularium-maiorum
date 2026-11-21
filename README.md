@@ -96,6 +96,17 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Vue d'ascendance Sosa (21/11/2026)
+
+- Nouvelle page **« Ascendance »** (menu latéral) : numérotation Sosa-Stradonitz depuis
+  **Vincent Tassier** (racine = 1, père = 2, mère = 3…), jusqu'à la génération 8.
+- Calcul pur `src/lib/sosa.ts` (7 tests) + 5 tests d'intégration sur la base réelle : **18 ancêtres**,
+  **9 liens établis** (gen 2–4) et **9 liens hypothétiques** (gen 5–8), **20 parents manquants**,
+  0 C3 promu. Les liens hypothétiques sont affichés en orange avec mention explicite.
+- Sondage API des trous proches (`docs/sondage-trous-vincent-2026-11-21.md`) : le fichier des décès
+  (matchID/INSEE, B1) ne contient **aucun décès correspondant** aux 5 cibles — homonymes écartés,
+  silence documentaire d'accès, H0 conservée.
+
 ### Classification des recherches et reconstruction depuis Vincent (21/11/2026)
 
 - Nouveau statut **`intervention_humaine`** (label « Intervention humaine », orange) : une recherche
@@ -174,7 +185,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 289 tests, 0 skippé
+bun test                               # 301 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

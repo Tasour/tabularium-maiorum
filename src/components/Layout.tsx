@@ -28,6 +28,7 @@ const ENTREES = [
   { to: "/photos", label: "Photos", icone: IconPhoto, actif: (p: string) => p.startsWith("/photos") },
   { to: "/individus", label: "Individus", icone: IconUsers, actif: (p: string) => p.startsWith("/individus") },
   { to: "/arbre", label: "Arbre", icone: IconBinaryTree2, actif: (p: string) => p.startsWith("/arbre") },
+  { to: "/ascendance", label: "Ascendance", icone: IconBinaryTree2, actif: (p: string) => p.startsWith("/ascendance") },
   { to: "/cartographie", label: "Cartographie", icone: IconMap2, actif: (p: string) => p.startsWith("/cartographie") },
   { to: "/recherches", label: "Recherches", icone: IconListSearch, actif: (p: string) => p.startsWith("/recherches") },
   { to: "/archives", label: "Archives", icone: IconBuildingBank, actif: (p: string) => p.startsWith("/archives") },

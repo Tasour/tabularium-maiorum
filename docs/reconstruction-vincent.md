@@ -42,12 +42,29 @@ Seuls les niveaux **G1→G2→G3** sont établis par déclaration/acte. À parti
 | Jean-Baptiste ← Lambert/Jeanne Catherine | E77, E78 | intervention humaine | acte de mariage ~1770 (cote à demander) |
 | Aline ← Antoine | E119 | intervention humaine | acte de naissance d'Aline, Mons 1869 |
 
-## 4. Métrique de couverture
+## 4. Métrique de couverture (calculée le 21/11/2026)
 
-- **Sosa documentés par acte (G1–G3)** : 7 / 7 au niveau 3, puis 0 au-delà.
-- **Liens hypothétiques** : 5 en attente de verdict.
+Vue **« Ascendance »** dans l'application : numérotation Sosa-Stradonitz de Vincent, avec statut de preuve par lien.
+
+| Mesure | Valeur |
+|---|---|
+| Ancêtres Sosa identifiés | **18** (gen 2 à 8) |
+| Liens **établis** | **9** (gen 2–4 : David, Agnès, Élisée, Arlette, Jean, Joséphine, Jean Félicien, Hélène Lamarque, Delphine Favre) |
+| Liens **hypothétiques** | **9** (gen 5–8 : Firmin, Aline, Pierre Joseph, Philomène, Antoine, Jean-Baptiste, Anne Joseph, Lambert, Jeanne Catherine) |
+| Parents manquants | **20** (cases Sosa vides) |
+| Profondeur | **8 générations** |
+| C3 promus | **0** (H0 conservée) |
+
+- **Liens hypothétiques** : 9 Sosa, tous en attente de verdict — la vue les affiche en orange, jamais comme établis.
 - **Trous sans parents** : 8, tous avec une enquête ouverte et une action décrite.
-- **Graphe établi** : 10 individuals `raccorde=true` ; 653 C3 non raccordés (H0 conservée).
+- **Graphe établi** : 10 individus `raccorde=true` ; 653 C3 non raccordés.
+
+### Sondage API des trous proches
+
+`docs/sondage-trous-vincent-2026-11-21.md` : le fichier des décès (matchID/INSEE, B1) a été interrogé
+pour Arlette Roussette, Jean Reymond, Hélène Lamarque, Delphine Favre et Joséphine Favre. **Aucun
+décès ne correspond aux cibles** (homonymes écartés, y compris 4 « Jean Reymond » nés vers 1936 mais
+décédés avant 2023). Silence documentaire d'accès — aucune promotion, H0 conservée.
 
 ## 5. Ce qui a été fait sans intervention humaine (21/11/2026)
 
