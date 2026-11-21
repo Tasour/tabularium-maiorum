@@ -23,9 +23,9 @@ exec("import-tassier.ts");
 exec("enrichir-tassier.ts");
 ouvrirBase(join(DOSSIER, "donnees.db"), join(racine, "drizzle"));
 
-test("159 rapports importés comme tâches, dont 120 absents de l'ancien index", async () => {
+test("161 rapports importés comme tâches, dont 122 absents de l'ancien index", async () => {
   const taches = await db.select().from(tache);
-  expect(taches.length).toBe(159);
+  expect(taches.length).toBe(161);
   expect(taches.some((t) => t.id === "tas-tache-E31")).toBe(true);
   expect(taches.some((t) => t.id === "tas-tache-E150")).toBe(true);
   const rapport = taches.find((t) => t.id === "tas-tache-E31")!;
@@ -72,7 +72,8 @@ test("les tâches sont liées aux fiches (Journal des recherches)", async () => 
 test("H0 conservée : hypotheses écartées en verdicts, jamais en faits", async () => {
   const vs = await db.select().from(verdict);
   expect(vs.filter((v) => v.action === "hypothese_ecartée").length).toBeGreaterThanOrEqual(12);
-  expect(vs.filter((v) => v.action === "temoignage").length).toBe(3);
+  // 3 témoignages historiques + 2 indications réservées des 21/11/2026.
+  expect(vs.filter((v) => v.action === "temoignage").length).toBe(5);
   const e99 = (await db.select().from(tache).where(eq(tache.id, "tas-tache-E99")))[0];
   // Rapport « tradition non documentée » : non trouvé n'est pas promu.
   expect(e99.statut).toBe("en_cours");
@@ -85,4 +86,36 @@ test("aucun ancêtre C3 n'est raccordé par l'enrichissement", async () => {
   const c3 = new Set((await db.select({ id: individu.id }).from(individu)).filter((i) => i.id.startsWith("tas-pz-")).map((i) => i.id));
   const liens = await db.select().from(filiation);
   expect(liens.filter((l) => c3.has(l.enfantId) || c3.has(l.parentId)).length).toBe(0);
+});
+
+test("E160/E161 : témoignages A1-témoin réservés, H0 conservée, aucun lien promu", async () => {
+  const e160 = (await db.select().from(tache).where(eq(tache.id, "tas-tache-E160")))[0];
+  const e161 = (await db.select().from(tache).where(eq(tache.id, "tas-tache-E161")))[0];
+  expect(e160).toBeDefined();
+  expect(e161).toBeDefined();
+  // « non résolu » et « non trouvé » restent des recherches ouvertes.
+  expect(e160.statut).toBe("en_cours");
+  expect(e161.statut).toBe("en_cours");
+  expect(e160.individuId).toBe("tas-jean_felicien");
+  expect(e161.individuId).toBe("tas-jean");
+  expect(e160.description).toContain("ENQUETE-160.md");
+  expect(e161.description).toContain("ENQUETE-161.md");
+
+  const vs = await db.select().from(verdict);
+  const t160 = vs.find((v) => v.id === "tas-verdict-E160-temoignage");
+  const t161 = vs.find((v) => v.id === "tas-verdict-E161-temoignage");
+  expect(t160?.temoin).toBe("A1-témoin");
+  expect(t160?.date).toBe("2026-11-21");
+  expect(t160?.note).toContain("à confirmer");
+  expect(t160?.note).toContain("je pense");
+  expect(t161?.temoin).toBe("A1-témoin");
+  expect(t161?.date).toBe("2026-11-21");
+  expect(t161?.note).toContain("soit père ou grand-père");
+  expect(t161?.note).toContain("Aucun ascendant créé");
+
+  // Aucun ascendant Alceste n'a été créé, Jean n'a toujours pas de parents établis.
+  const alceste = (await db.select().from(individu)).filter((i) => (i.prenoms ?? "").toLowerCase().includes("alceste"));
+  expect(alceste.length).toBe(0);
+  const parents = (await db.select().from(filiation)).filter((f) => f.enfantId === "tas-jean");
+  expect(parents.length).toBe(0);
 });

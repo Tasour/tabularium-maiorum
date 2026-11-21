@@ -42,9 +42,13 @@ et ses modifications restent sous AGPL s'ils sont publiés.
 
 ### Enrichissement du 21/11/2026
 
-- **159 rapports d'enquête** (`ENQUETE-01` à `159`, dont **120 absents de l'ancien index**) sont
+- **161 rapports d'enquête** (`ENQUETE-01` à `161`, dont **122 absents de l'ancien index**) sont
   importés comme tâches enrichies, avec le rapport markdown complet, le grade global et la
-  conclusion. « Non trouvé / non documenté / H0 conservée » reste `en_cours` : jamais promu en fait.
+  conclusion. « Non résolu / non trouvé / non documenté / H0 conservée » reste `en_cours` : jamais promu en fait.
+- **E160 et E161** (21/11/2026) instruisent deux indications du détenteur : « le mauvais Félicien
+  est celui né à Lyon » et « un Alceste, père ou grand-père de Jean Reymond, inhumé à Chambéry ».
+  Elles sont enregistrées comme **témoignages `A1-témoin` réservés**, datés et marqués « à confirmer »
+  — aucun lien modifié, aucun ascendant créé, aucun degré tranché. H0 conservée dans les deux cas.
 - **558 consultations** reprennent les sources gradées (cotes, URLs, dates, grades Admiralty).
 - **13 relevés** extraits des 4 transcriptions, avec les graphies telles qu'écrites
   (`[T]assier`, `[Petit ?]`) et les rôles d'acte ; 10 sont rattachés à une fiche existante.
@@ -88,7 +92,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 220 tests, 0 skippé
+bun test                               # 221 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

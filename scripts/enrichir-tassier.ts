@@ -24,7 +24,7 @@ const RAPPORTS = join(import.meta.dir, "donnees", "rapports");
 const E = (n: number) => (n < 10 ? `E0${n}` : `E${n}`);
 ouvrirBase(BASE_DONNEES, DOSSIER_MIGRATIONS);
 
-const stats: Record<string, number> = { dates: 0, taches: 0, consultations: 0, relevés: 0, rattaches: 0, liaisons: 0, hypothesesEcartees: 0 };
+const stats: Record<string, number> = { dates: 0, taches: 0, consultations: 0, relevés: 0, rattaches: 0, liaisons: 0, hypothesesEcartees: 0, temoignagesReserves: 0 };
 const nonParses: string[] = [];
 
 /** Insertion déterministe. */
@@ -192,6 +192,13 @@ const LIAISONS_EXPLICITES: Record<number, string> = {
   7: "pere_josephine", 8: "elisee", 9: "elisee", 10: "firmin_leon", 11: "firmin_leon",
   12: "firmin_leon", 13: "felicien_leon", 25: "josephine", 26: "robert", 27: "cecile",
   28: "laurent", 31: "felicien_leon", 60: "vincent", 157: "felicien_leon",
+  160: "jean_felicien", 161: "jean",
+};
+
+/** Témoignages du détenteur enregistrés tels quels, avec leur réserve explicite. */
+const TEMOIGNAGES_RESERVES: Record<number, string> = {
+  160: "Le détenteur pense que « le mauvais Félicien est celui né à Lyon » (23/09/1898). Indication « je pense », à confirmer par l'acte de naissance lyonnais (fonds 2E). Aucun lien modifié, aucun prénom écarté sans acte.",
+  161: "Le détenteur indique un « Alceste » parmi les ascendants de Jean Reymond, « soit père ou grand-père », tous deux inhumés au cimetière de Chambéry. À confirmer par l'acte 3E 4265 et un registre de sépulture. Aucun ascendant créé, aucun degré tranché.",
 };
 
 const normaliser = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -234,10 +241,21 @@ for (const fichier of fichiers) {
   await db.update(tache).set({ individuId: cibleId }).where(eq(tache.id, tacheId));
   stats.liaisons++;
 
-  // Hypothèse écartée -> verdict (pas un fait, pas une promotion).
+  // Témoignage réservé : daté, gradé A1-témoin, mais explicitement « à confirmer ».
   const texte = readFileSync(join(RAPPORTS, fichier), "utf8");
+  if (TEMOIGNAGES_RESERVES[n]) {
+    await inserer(verdict, {
+      id: `tas-verdict-${E(n)}-temoignage`, cibleId,
+      titre: `${E(n)} — indication du détenteur (à confirmer)`,
+      temoin: "A1-témoin", date: "2026-11-21",
+      action: "temoignage", note: TEMOIGNAGES_RESERVES[n],
+    });
+    stats.temoignagesReserves++;
+  }
+
+  // Hypothèse écartée -> verdict (pas un fait, pas une promotion).
   const conclusion = conclure(texte);
-  if (/H0 conserv[ée]e|non document|non trouv[ée]|non r[ée]solu/i.test(conclusion)) {
+  if (!TEMOIGNAGES_RESERVES[n] && /H0 conserv[ée]e|non document|non trouv[ée]|non r[ée]solu/i.test(conclusion)) {
     const grade = texte.match(/Grade global\s*:(?:\*\*)?\s*([A-F]\d?)/i)?.[1] ?? "C3";
     await inserer(verdict, {
       id: `tas-verdict-${E(n)}`, cibleId, titre: `${E(n)} — hypothèse écartée`,
@@ -260,9 +278,10 @@ const totalReleves = (await db.select({ id: releve.id }).from(releve)).length;
 const totalRattaches = (await db.select({ id: releve.id }).from(releve).where(sql`${releve.individuId} is not null`)).length;
 const verifs: [string, number, number][] = [
   ["dates d'actes corrigées", (await db.select({ date: acte.date }).from(acte)).filter((a) => a.date && a.date !== "2026-11-18").length, 3],
-  ["tâches (rapports)", (await db.select({ id: tache.id }).from(tache)).length, 159],
+  ["tâches (rapports)", (await db.select({ id: tache.id }).from(tache)).length, 161],
   ["relevés présents", totalReleves, 13],
   ["relevés rattachés", totalRattaches, 10],
+  ["témoignages réservés", (await db.select({ id: verdict.id }).from(verdict)).filter((v) => v.id.endsWith("-temoignage")).length, 2],
 ];
 let echecs = 0;
 for (const [label, obtenu, attendu] of verifs) {
