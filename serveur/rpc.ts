@@ -31,7 +31,7 @@ const LECTURE = new Set([
   "relevesActe", "relevesIndividu", "evenementsIndividus", "relevesDesActes", "relevesNonRattaches",
   "listeRegistres",
   "tableauDeBord",
-  "listeDoutes", "doutesIndividu", "verdictsIndividu",
+  "listeDoutes", "doutesIndividu", "verdictsIndividu", "confianceIndividu",
   "donneesCitations",
   "exporterGedcom",
   "liensArchivesPerso",

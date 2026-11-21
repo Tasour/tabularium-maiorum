@@ -144,3 +144,24 @@ export async function creerRechercheDoute(id: string) {
 export async function verdictsIndividu(individuId: string) {
   return db.select().from(verdict).where(eq(verdict.cibleId, individuId)).orderBy(verdict.date);
 }
+
+/**
+ * Indice de confiance d'une fiche, calculé depuis les preuves réellement présentes.
+ * Lecture seule, aucune probabilité généalogique : mesure l'état du dossier.
+ */
+export async function confianceIndividu(individuId: string) {
+  const [i] = await db.select().from(individu).where(eq(individu.id, individuId));
+  if (!i) return null;
+  const liens = await db.select().from((await import("../db/schema")).filiation);
+  const verdicts = await verdictsIndividu(individuId);
+  const { calculerConfiance } = await import("../lib/confiance-fiche");
+  return calculerConfiance({
+    // Un acte ne compte que s'il est explicitement lié à la fiche. Une simple
+    // mention du prénom dans une transcription est un indice, pas une preuve.
+    aUnActe: !!i.acteNaissanceId || !!i.acteDecesId,
+    aUneDate: !!i.naissance,
+    aUnLieu: !!i.naissanceLieuId,
+    aUneFiliationEtablie: liens.some((l) => l.enfantId === individuId && l.type === "biologique"),
+    aUnVerdict: verdicts.some((v) => v.action === "temoignage"),
+  });
+}

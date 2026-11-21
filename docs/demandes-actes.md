@@ -3,6 +3,11 @@
 **Date :** 2026-11-21 · **Statut :** aucun courrier envoyé, aucune cote inventée.
 
 > Chaque ligne reprend une démarche déjà rédigée dans un rapport d'enquête. Les cotes marquées « à relever » doivent être **confirmées par le service** avant toute commande : ne pas les extrapoler d'un inventaire lu partiellement. Le grade d'une source ne s'additionne pas : morts.fr, Acte-Décès.fr et GénéaFrance partent du même fichier INSEE.
+>
+> **Rectificatif 21/11/2026 (E31) :** l'URL présentée comme « acte n°78 du 29/09/1896 » montre en réalité
+> les folios **3163/3164** (actes 68-73 et 78 « Delavarde »). L'acte de Léon Félicien, au folio **3166**,
+> reste celui de `preuves/anor-1896-naissance-130.jpg`. Ne pas commander l'image `0dc5325c…` comme preuve
+> de la naissance ; elle est archivée comme contexte du registre dans `preuves/acte-1896-image-129-par-acte78.jpg`.
 
 ## Archives départementales du Nord (Lille)
 

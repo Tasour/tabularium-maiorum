@@ -96,6 +96,20 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Cotes, image source et confiance calculée (21/11/2026)
+
+- **17 cotes d'inventaire** supplémentaires importées comme sources (`3 E 8133`, `3E 4265`, `6M 946`…),
+  avec mention « cote relevée, acte non consulté ». Les **plages de cotation** (`3E 4170-5292` tronquée en
+  `3E 4170`) sont **exclues** : jamais extrapolées en registre.
+- **Rectificatif E31** : l'URL présentée comme l'acte n°78 de 1896 montre en réalité les folios 3163/3164
+  (acte 78 « Delavarde »). L'image est archivée avec SHA-256 comme **contexte du registre**, jamais comme
+  preuve de la naissance ; l'acte du folio 3166 reste `preuves/anor-1896-naissance-130.jpg`.
+- **Indice de confiance par fiche** (`confianceIndividu`, lecture seule) : 0-100 calculé depuis les preuves
+  réellement liées — acte (40), date (20), lieu (10), filiation établie (20), verdict (10). Un lien
+  hypothétique ne rapporte rien. Affiché dans « Rigueur de la preuve » avec les manques détaillés au survol.
+- **Bug de données corrigé** : l'acte de naissance de 1925 (Arlette Hélène) était attaché à Élisée (1927)
+  et à Arlette Roussette (sans date). Liens retirés avec motif ; la preuve reste sur la bonne fiche.
+
 ### Graphe Geneanet structuré (21/11/2026)
 
 Les champs `p` (géniteur) et `sp` (conjoint) des 653 ancêtres PZ, jusqu'ici stockés comme texte, sont
@@ -226,7 +240,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 327 tests, 0 skippé
+bun test                               # 344 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
