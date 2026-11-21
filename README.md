@@ -96,6 +96,22 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Relecture intégrale de la capture MyHeritage (21/11/2026, E163)
+
+Les **28 800 px** de la capture archivée ont été découpés en **12 bandes de 2 400 px** et lues
+intégralement. La plateforme masque les jours, mois, lieux et professions aux visiteurs non
+connectés : **aucun n'a été deviné**. Cinq groupes familiaux nommés sont conservés comme **pistes C3
+non raccordées**, avec la capture locale pour preuve :
+
+- Paula Madeleine **Tassier** et Pauletta Marie **Canivez** (née Tassier), filles déclarées du
+  « Léon Félicien 1896-1980 » — concordent avec notre A1 mais **non raccordées** sans acte ;
+- Emilienne Aline **Scory** (née Tassier), sœur d'un « Léon Firmin ~1867 » — prénom inversé,
+  **pas notre Firmin** ;
+- Léona **Tassier**, sœur d'un « Léon 1901-1974 » ; Euphémie Joséphine **Langeliez**, conjointe
+  d'un « Léon Ghislain 1874-1931 ».
+
+Aucun rattachement, aucune date inventée, H0 conservée.
+
 ### Dernier bloc de liens (21/11/2026)
 
 - **A** : seule l'union Firmin × Aline est datée (**11/02/1889**, acte A1 lu `1 Mi EC 012 R 003`).
@@ -249,7 +265,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 348 tests, 0 skippé
+bun test                               # 353 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
