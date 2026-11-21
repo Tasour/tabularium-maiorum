@@ -96,6 +96,18 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Dernière tranche (21/11/2026)
+
+- **Cousolre (59)** géolocalisée via `geo.api.gouv.fr` (correspondance exacte, code 59157) ; 6 lieux
+  restent sans coordonnées, explicitement marqués « non vérifié ».
+- **2 cotes nominatives** importées comme `source` (`3 E 10054` Élisée 1927, `3E 4265` Jean Reymond
+  1936) avec mention « cote relevée en inventaire A1, acte non consulté » — **aucun acte promu**.
+  Les plages administratives (`3E 4170-5292`) sont exclues.
+- **`docs/relecture-doublons.md`** : les 37 paires C3 restantes et les 2 relevés en attente sont
+  consignés pour validation humaine, sans fusion automatique.
+- L'outil `tools.archives.geocode` (plugin `archives-navigateur`) expose le géocodage officiel
+  borné aux correspondances exactes.
+
 ### Correction des doublons possibles (21/11/2026)
 
 Le tableau de bord affichait **1 465 doublons possibles**. Cause racine : le champ Geneanet `d`
