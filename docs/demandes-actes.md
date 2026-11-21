@@ -9,7 +9,15 @@
 > reste celui de `preuves/anor-1896-naissance-130.jpg`. Ne pas commander l'image `0dc5325c…` comme preuve
 > de la naissance ; elle est archivée comme contexte du registre dans `preuves/acte-1896-image-129-par-acte78.jpg`.
 
-## Archives départementales du Nord (Lille)
+## Archives départementales du Nord (Lille) — plan de lecture Trélon (E168)
+
+Registres numérisés (notices A1, **images non lues**) pour trancher E167 — deux fils déclarés de Jean-Baptiste :
+
+- **`5 Mi 011 R 022`** — BMS (lacunes) 1694-1792, 1 211 medias, ARK `2vrh76qlk459` → années repères **1748, 1753, 1791** (Jean-Baptiste est né **avant** l'état civil de 1793 : à chercher ici, pas dans le registre NMD).
+- **`5 Mi 011 R 021`** — BMS (lacunes) 1635-1726, 250 medias, ARK `frn1sc6qvl3b` → frange 1700-1726.
+- **`5 Mi 011 R 023`** — NMD 1793-1828, 1 110 medias, ARK `sfg3cdv8k916` → année repère **1796** (Anne Joseph Fontaine).
+
+Procédure : index TD 1792-1802 puis vues BMS aux années repères ; exiger **date + paroisse + parents + numéro d'acte** avant toute modification de la chaîne Sosa (H0).
 
 - **Acte de naissance d'Élisée Tassier, 23/02/1927, Maubeuge** — cote : 3 E 10054 · rapports : ENQUETE-154.md · Mise en ligne prévue > 2028 — copie à demander
 - **Acte de mariage d'Élisée Tassier × « Arlette », Maubeuge 195x** — cote : à relever dans l'inventaire · rapports : ENQUETE-155.md, ENQUETE-108.md · Année illisible (« 11 mars 195? »), graphie Lerose/Leroux non stabilisée

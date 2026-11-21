@@ -96,6 +96,15 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Plan de lecture Trélon (21/11/2026, E168)
+
+L'enquête E81 (jamais intégrée) fournit les **3 registres numérisés** qui couvrent la période de la
+divergence E167 : `5 Mi 011 R 022` (BMS 1694-1792, 1 211 medias — années repères **1748, 1753, 1791**),
+`5 Mi 011 R 021` (BMS 1635-1726) et `5 Mi 011 R 023` (NMD 1793-1828 — **1796**). Cotes + ARK enregistrées
+comme sources d'inventaire A1, avec mention « aucune image lue ». Piège temporel évité : **1791 est avant
+l'état civil de 1793**, donc Jean-Baptiste est à chercher dans le BMS, pas dans le NMD. Procédure de
+lecture exigeant date + paroisse + parents + numéro d'acte avant toute modification de la chaîne Sosa.
+
 ### Divergences internes du graphe PZ (21/11/2026, E167)
 
 L'enquête E86 (jamais intégrée) est confirmée par nos propres données : **PZ 181 Pierre Joseph
@@ -295,7 +304,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 374 tests, 0 skippé
+bun test                               # 378 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
