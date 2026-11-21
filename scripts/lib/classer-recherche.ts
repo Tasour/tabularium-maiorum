@@ -13,19 +13,26 @@ export type Classification = { categorie: CategorieRecherche; motif: string };
 /** Extrait le contenu d'une section markdown (titre `##`, jusqu'au titre suivant). */
 export function section(texte: string, motifTitre: RegExp): string {
   const lignes = texte.split("\n");
-  const debut = lignes.findIndex((l) => /^#{1,3}\s/.test(l) && motifTitre.test(l));
+  const debut = lignes.findIndex((l) => /^#{2,3}\s/.test(l) && motifTitre.test(l));
   if (debut < 0) return "";
-  const fin = lignes.findIndex((l, i) => i > debut && /^#{1,3}\s/.test(l));
+  const fin = lignes.findIndex((l, i) => i > debut && /^##\s/.test(l));
   return lignes.slice(debut + 1, fin < 0 ? undefined : fin).join("\n");
 }
 
 /** Nombre de lignes de source (tableau), hors en-tête et séparateur. */
 export function compterSources(texte: string): number {
   const src = section(texte, /sources/i);
-  return src.split("\n").filter((l) => {
+  const lignes = src.split("\n");
+  const table = lignes.filter((l) => {
     const t = l.trim();
     return t.startsWith("|") && !/^\|[\s:|-]+\|$/.test(t) && !/^\|\s*(ID|#|Source|Référence)/i.test(t);
   }).length;
+  // Listes numérotées (E02, E09) et ledgers (E10) : une ligne = une source.
+  const liste = lignes.filter((l) => /^\s*\d+[.)]\s+/.test(l) || /^\|\s*[A-Z]-\d+/.test(l)).length;
+  // Prose : seulement les lignes qui citent une URL ou une cote — pas les grades seuls
+  // (sinon les synthèses E150/E40 seraient comptées comme sources).
+  const prose = lignes.filter((l) => /https?:\/\//.test(l) || /\b\d\s?[EEM]\s?\d{3,5}/.test(l)).length;
+  return Math.max(table, liste, prose);
 }
 
 const ABANDON = /aucune action|aucune piste|plus de piste|classer sans suite|abandonner|épuis[ée]s?|rien de plus à faire/i;

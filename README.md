@@ -104,7 +104,7 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
   **ne clôt pas** `termineLe` : c'est une attente, pas une fin.
 - `abandonne` existe déjà ; il n'est attribué que si le rapport dit explicitement qu'il n'y a plus
   d'action, avec motif écrit. Les cas ambigus restent en `intervention_humaine`.
-- Les **161 enquêtes** sont classées : **151 intervention humaine**, **8 en cours** (garde non
+- Les **161 enquêtes** sont classées : **158 intervention humaine**, **1 en cours** (garde non
   satisfaite), **2 trouvé**, **0 abandonné**. Journal auditable : `docs/classification-recherches.md`.
 - L'onglet « Recherches » affiche le nouveau statut (filtre dédié + inclus dans « En cours et à faire »).
 - **`docs/reconstruction-vincent.md`** : chaîne Sosa de Vincent sur 9 générations, 8 ascendants sans
@@ -174,7 +174,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 287 tests, 0 skippé
+bun test                               # 289 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

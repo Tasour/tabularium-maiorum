@@ -51,7 +51,7 @@ Seuls les niveaux **G1→G2→G3** sont établis par déclaration/acte. À parti
 
 ## 5. Ce qui a été fait sans intervention humaine (21/11/2026)
 
-- Les 161 enquêtes ont été classées : **151 intervention humaine**, **8 en cours** (garde non satisfaite), **2 trouvé**, **0 abandonné** (aucun rapport ne dit qu'il n'y a plus d'action) — voir `docs/classification-recherches.md`.
+- Les 161 enquêtes ont été classées : **158 intervention humaine**, **1 en cours** (garde non satisfaite), **2 trouvé**, **0 abandonné** (aucun rapport ne dit qu'il n'y a plus d'action) — voir `docs/classification-recherches.md`.
 - matchID/INSEE a fourni des décès sourcés (B1) et l'audience des API a été documentée.
 - Aucune promotion C3, aucune fusion, aucune cote inventée.
 

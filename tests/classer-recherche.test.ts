@@ -63,3 +63,15 @@ test("motif borné (jamais un texte interminable)", () => {
 test("europe : accents et casse du marqueur d'abandon", () => {
   expect(classerRapport(rapport("Pistes épuisées.")).categorie).toBe("abandonne");
 });
+
+test("liste numérotée de sources (E02) et ledger (E10) comptés", () => {
+  const liste = "# Rapport\n## Sources gradées\n1. **Acte** · A1 · url\n2. **INSEE** · B1 · url\n## Ce qui ferait changer la conclusion\nCopie.\n## Prochaine action\n1. Demander copie.";
+  expect(compterSources(liste)).toBe(2);
+  expect(classerRapport(liste).categorie).toBe("intervention_humaine");
+});
+
+test("synthèse sans URL ni cote (E150) -> en_cours, pas comptée comme source", () => {
+  const synthese = "# Synthèse\n## Sources\nSynthèses des enquêtes 1 à 149 (grades A1 et C3).\n## Ce qui ferait changer la conclusion\nCopie.\n## Prochaine action\n1...." ;
+  expect(compterSources(synthese)).toBe(0);
+  expect(classerRapport(synthese).categorie).toBe("en_cours");
+});
