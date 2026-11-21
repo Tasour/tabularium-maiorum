@@ -14,6 +14,11 @@ export const DOSSIER_MIGRATIONS = resolve(process.env.DOSSIER_MIGRATIONS ?? join
 
 export const PORT = Number(process.env.PORT ?? 3210);
 
+/** Auto-login local (raccourci Omarchy) : email du compte à ouvrir et jeton secret.
+ *  Les deux doivent être définis pour que la route /api/auth/autologin soit active. */
+export const AUTOLOGIN_EMAIL = process.env.TABULARIUM_AUTOLOGIN_EMAIL ?? "";
+export const AUTOLOGIN_JETON = process.env.TABULARIUM_AUTOLOGIN_JETON ?? "";
+
 /** Version du programme (package.json), affichée dans l'interface et par /api/sante. */
 export const VERSION: string = (await import("../package.json")).version;
 

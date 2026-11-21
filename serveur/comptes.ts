@@ -93,6 +93,12 @@ export const utilisateurParId = (id: string) => {
   const l = ligneParId(id);
   return l ? versUtilisateur(l) : null;
 };
+
+/** Compte par adresse, pour l'auto-login local. Null si absent ou désactivé. */
+export const utilisateurParEmail = (email: string) => {
+  const l = ligneParEmail(email);
+  return l && l.actif ? versUtilisateur(l) : null;
+};
 export const listeUtilisateurs = () =>
   base.query<Ligne, []>("SELECT * FROM utilisateur ORDER BY super DESC, email").all().map(versUtilisateur);
 

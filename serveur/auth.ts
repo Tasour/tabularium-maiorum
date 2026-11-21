@@ -5,9 +5,9 @@ import { Elysia, t } from "elysia";
 import {
   annulerLiens, changerMotDePasse, installerPremierAdmin, nbUtilisateurs, creerLien, creerSession, creerUtilisateur, DUREE_SESSION_LONGUE_MS, lireLien, lireSession,
   liensEnAttente, listeUtilisateurs, modifierUtilisateur, ROLES, supprimerSession, supprimerSessions, supprimerUtilisateur,
-  utiliserLien, utilisateurParId, verifierIdentifiants, verifierLongueur, type Role, type Utilisateur,
+  utiliserLien, utilisateurParEmail, utilisateurParId, verifierIdentifiants, verifierLongueur, type Role, type Utilisateur,
 } from "./comptes";
-import { TUILES, VERSION } from "./config";
+import { AUTOLOGIN_EMAIL, AUTOLOGIN_JETON, TUILES, VERSION } from "./config";
 import { ErreurMetier } from "./erreurs";
 
 export const COOKIE_SESSION = "tabularium_session";
@@ -75,6 +75,21 @@ const publicUtilisateur = (u: Utilisateur) => ({
   individuId: u.individuId,
 });
 
+/** Décision pure de l'auto-login : ip de boucle, jeton configuré, compte existant. */
+export type DecisionAutologin = "ok" | "introuvable" | "compte-indisponible";
+export function decisionAutologin(args: {
+  ip?: string;
+  jetonRecu?: string;
+  jetonAttendu: string;
+  emailAttendu: string;
+  trouver: (email: string) => { id: string } | null;
+}): DecisionAutologin {
+  const { ip = "", jetonRecu, jetonAttendu, emailAttendu, trouver } = args;
+  const boucle = ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1";
+  if (!jetonAttendu || !emailAttendu || !boucle || !jetonRecu || jetonRecu !== jetonAttendu) return "introuvable";
+  return trouver(emailAttendu) ? "ok" : "compte-indisponible";
+}
+
 /** Ouvre une session et pose le cookie (connexion, ou installation). */
 function poserSession(cookie: Record<string, { set: (o: object) => void }>, request: Request, utilisateurId: string, souvenir: boolean) {
   const s = creerSession(utilisateurId, souvenir);
@@ -95,6 +110,39 @@ export const routesAuth = new Elysia()
   // --- Premier lancement : création du compte administrateur
   // Public : de quoi afficher la page de connexion (ou d'installation) et les cartes.
   .get("/api/auth/etat", () => ({ installe: nbUtilisateurs() > 0, version: VERSION, tuiles: TUILES }))
+
+  /**
+   * Auto-login du raccourci local : ouvre une session pour le compte désigné par
+   * TABULARIUM_AUTOLOGIN_EMAIL, puis redirige vers l'accueil. Route désactivée si
+   * le jeton ou l'email ne sont pas configurés. Réservée à la boucle locale.
+   * Le mécanisme de session (cookie, durée, droits) est identique à une connexion normale.
+   */
+  .get(
+    "/api/auth/autologin",
+    ({ query, cookie, request, server, set }) => {
+      const decision = decisionAutologin({
+        ip: server?.requestIP(request)?.address,
+        jetonRecu: query.jeton,
+        jetonAttendu: AUTOLOGIN_JETON,
+        emailAttendu: AUTOLOGIN_EMAIL,
+        trouver: utilisateurParEmail,
+      });
+      if (decision === "introuvable") {
+        set.status = 404;
+        return { erreur: "Introuvable" };
+      }
+      if (decision === "compte-indisponible") {
+        set.status = 403;
+        return { erreur: "Compte local indisponible" };
+      }
+      const u = utilisateurParEmail(AUTOLOGIN_EMAIL)!;
+      poserSession(cookie, request, u.id, true);
+      set.status = 302;
+      set.headers.location = "/";
+      return {};
+    },
+    { query: t.Object({ jeton: t.Optional(t.String()) }) },
+  )
   .post(
     "/api/auth/installation",
     async ({ body, cookie, request, server }) => {

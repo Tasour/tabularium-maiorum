@@ -92,7 +92,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 221 tests, 0 skippé
+bun test                               # 232 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
@@ -104,6 +104,17 @@ exécution ; tous les identifiants sont déterministes et les insertions idempot
 
 Le fichier `tabularium.ini` désactive la vérification de mise à jour : l'arbre fonctionne sans appel
 réseau externe.
+
+### Ouverture sans écran de connexion (raccourci Omarchy)
+
+Le raccourci `atelier.tabularium` lance `~/.local/bin/tabularium-ouvrir`, qui ouvre
+`GET /api/auth/autologin?jeton=…`. Cette route **locale uniquement** (boucle `127.0.0.1`/`::1`)
+pose un cookie de session de 30 jours pour le compte `arbre@local.invalid`, exactement comme une
+connexion normale (`HttpOnly`, `SameSite=Strict`), puis redirige vers `/`. Le secret est lu depuis
+`~/.config/tabularium/autologin.env` (mode `600`), jamais écrit dans le `.desktop` ni dans le
+fichier de service. L'authentification ordinaire reste intacte : sans jeton, la route répond `404`
+et l'écran de connexion réapparaît. Ne jamais activer `TABULARIUM_AUTOLOGIN_*` sur une instance
+exposée hors de la boucle locale.
 
 ---
 
