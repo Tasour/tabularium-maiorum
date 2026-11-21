@@ -91,6 +91,20 @@ Ces décès comblent des cases, ils **n'établissent aucune filiation** (H0 cons
 
 Chaque verdict se prend sur une pièce lue, **jamais** par déduction d'un nom ou d'une ressemblance. Les enquêtes correspondantes sont en « Intervention humaine ».
 
+## 4quater. Corroboration par le graphe Geneanet (21/11/2026)
+
+Les 653 ancêtres PZ contenaient des index de géniteurs et de conjoints inexploités. Structurés dans
+`pz_lien` (**416 liens de parenté**, **170 liens de conjoints**, tous **C3**), ils montrent que la
+chaîne Geneanet **PZ 192 → 181 → 117 → 93** (Firmin 1866 → Pierre Joseph 1835 → Jean-Baptiste 1791 →
+Lambert 1748) est **exactement** notre chaîne Sosa **16 → 32 → 64 → 128**.
+
+C'est une **corroboration interne**, pas une preuve : le graphe Geneanet reste C3 et aucun de ces
+liens n'est promu au grade A1. Il apporte deux choses :
+
+1. **Un contrôle de cohérence** : notre chaîne hypothétique est celle que Geneanet a relevée.
+2. **Une correction des doublons** : 15 paires de la fiche de relecture ont des géniteurs différents →
+   personnes distinctes, enregistrées comme `doute differentes` avec le motif lu.
+
 ## 5. Ce qui a été fait sans intervention humaine (21/11/2026)
 
 - Les 161 enquêtes ont été classées : **158 intervention humaine**, **1 en cours** (garde non satisfaite), **2 trouvé**, **0 abandonné** (aucun rapport ne dit qu'il n'y a plus d'action) — voir `docs/classification-recherches.md`.

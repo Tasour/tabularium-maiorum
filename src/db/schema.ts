@@ -360,6 +360,26 @@ export const verdict = sqliteTable(
 );
 export type Verdict = typeof verdict.$inferSelect;
 
+/**
+ * Liens du graphe Geneanet (PZ), grade C3 : parent ou conjoint entre deux
+ * ancêtres non raccordés. Jamais promu dans le noyau A1 sans verdict humain.
+ */
+export const pzLien = sqliteTable(
+  "pz_lien",
+  {
+    id: id(),
+    type: text("type").notNull(),
+    sourceId: text("source_id").notNull().references(() => individu.id, { onDelete: "cascade" }),
+    cibleId: text("cible_id").notNull().references(() => individu.id, { onDelete: "cascade" }),
+    creeLe: creeLe(),
+  },
+  (t) => [
+    uniqueIndex("pz_lien_unique").on(t.type, t.sourceId, t.cibleId),
+    index("pz_lien_source_idx").on(t.sourceId),
+    index("pz_lien_cible_idx").on(t.cibleId),
+  ],
+);
+
 /** Journal des modifications : une ligne par action d'écriture (fonction appelée, par qui, sur quoi). */
 export const journal = sqliteTable(
   "journal",

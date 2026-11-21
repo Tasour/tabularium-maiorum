@@ -4,6 +4,20 @@
 
 > Règle non négociable : **aucune fusion automatique**. Ces paires sont des *suggestions* issues d'un score (nom + date/lieu/parents). Un nom identique et des années compatibles ne prouvent pas l'identité : H0 reste l'hypothèse nulle. Toute décision se prend dans l'interface (« Peut-être la même personne », « Comparer / fusionner », « Personnes différentes ») et est enregistrée avec une date.
 
+## 0. Correction par le graphe Geneanet (15 paires, 21/11/2026)
+
+Le champ `p` des 653 PZ contient l'index de leur **géniteur**. En le structurant (`pz_lien`, 416 liens),
+**15 des paires C3 ci-dessous ont des géniteurs différents** : ce ne sont pas des doublons mais des
+**personnes distinctes portant le même nom**. Elles sont enregistrées comme `doute` `differentes` avec
+le motif complet, par exemple :
+
+> PZ 554 (Anne TASSIER) a pour géniteur 551 (Jean dit Petit Jean TASSIER) ; PZ 570 (Anne TASSIER) a
+> pour géniteur 568 (Thomas BAPTISTE TASSIER) — géniteurs différents : personnes distinctes, H0 conservée.
+
+Aucune fusion n'a été effectuée ; cette correction vient **des données elles-mêmes**, grade C3, jamais
+d'une déduction de nom. Les autres paires restent à examiner (le graphe ne tranche pas quand un seul
+des deux a un géniteur connu).
+
 ## 1. Paires proposées quand on active « Comparer aussi les C3 » (37)
 
 Les 7 premières lignes opposent une fiche **établie par acte (A1)** à son doublon présumé dans la liste Geneanet (C3) : il s'agit très probablement de la **même personne historique**, mais les deux fiches restent distinctes tant qu'aucune vérification nominative n'a été faite.

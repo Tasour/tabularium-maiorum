@@ -96,6 +96,20 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Graphe Geneanet structuré (21/11/2026)
+
+Les champs `p` (géniteur) et `sp` (conjoint) des 653 ancêtres PZ, jusqu'ici stockés comme texte, sont
+désormais structurés dans la table **`pz_lien`** (migration `0015`) : **416 liens de parenté** et
+**170 liens de conjoints**, tous **grade C3**, jamais promus dans le noyau A1.
+
+- **Corroboration** : la chaîne PZ `192 → 181 → 117 → 93` est exactement notre chaîne Sosa
+  `16 → 32 → 64 → 128` (Firmin → Pierre Joseph → Jean-Baptiste → Lambert). Contrôle interne, pas une preuve.
+- **Faux doublons corrigés** : 15 paires de `docs/relecture-doublons.md` ont des **géniteurs différents**
+  → personnes distinctes, enregistrées comme `doute differentes` avec le motif lu. Ex. : PZ 554 (Anne
+  TASSIER, géniteur Jean dit Petit Jean) ≠ PZ 570 (Anne TASSIER, géniteur Thomas Baptiste).
+- `u` est un numéro séquentiel (653 « unions » de taille 1) : **jamais** utilisé comme identifiant de famille.
+- Aucun C3 promu, 0 filiation vers un PZ.
+
 ### Bloc autonome final (21/11/2026)
 
 - **2 relevés vides** créés accidentellement par l'UI supprimés (`nettoyer-releves-vides.ts`, idempotent) ;
@@ -212,7 +226,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 316 tests, 0 skippé
+bun test                               # 327 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
