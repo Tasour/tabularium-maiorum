@@ -96,6 +96,15 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Dernier bloc de liens (21/11/2026)
+
+- **A** : seule l'union Firmin × Aline est datée (**11/02/1889**, acte A1 lu `1 Mi EC 012 R 003`).
+  La mention marginale du 06/01/1923, dont l'attribution est à vérifier (E157), n'est **pas** enregistrée.
+- **B** : **40 / 162** enquêtes sont liées à une personne (23 cibles explicites traitées) ; E150 reste
+  non liée (synthèse sans cible).
+- **C** : les 6 liens Agnès/Cécile/Laurent ← Jean/Joséphine existaient déjà ; aucun dupliqué, aucun type
+  modifié sans verdict (règle locale 4). Contrôle d'unicité par paire, pas par id.
+
 ### Cotes, image source et confiance calculée (21/11/2026)
 
 - **17 cotes d'inventaire** supplémentaires importées comme sources (`3 E 8133`, `3E 4265`, `6M 946`…),
@@ -240,7 +249,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 344 tests, 0 skippé
+bun test                               # 348 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
