@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Badge, Button, Center, Group, Paper, ScrollArea, SegmentedControl, SimpleGrid, Stack, Table, Tabs, Text, TextInput, Title, Tooltip } from "@mantine/core";
+import { Badge, Button, Center, Group, Paper, ScrollArea, SegmentedControl, SimpleGrid, Stack, Switch, Table, Tabs, Text, TextInput, Title, Tooltip } from "@mantine/core";
 import { IconAlertTriangle, IconLayoutGrid, IconSearch, IconTable, IconTimelineEvent, IconUserPlus } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
@@ -17,6 +17,7 @@ import { LECTURE_SEULE } from "../lib/mode";
 import { clicOuvrir, useDefilement, useMemoire } from "../lib/onglets";
 import { ListeDoutes, useDoublonsPossibles } from "../components/Doutes";
 import { afficherDate } from "../lib/dates";
+import { clePhonetique } from "../lib/phonetique";
 
 const CLE_VUE = "tabularium.individus.vue";
 const lireVue = () => {
@@ -127,6 +128,7 @@ export function Individus() {
     (e) => e.acteId,
   );
   const [recherche, setRecherche] = useMemoire("individus.recherche", "");
+  const [phonetique, setPhonetique] = useMemoire("individus.phonetique", false);
   const [ongletPage, setOngletPage] = useMemoire<string | null>("individus.onglet", "individus");
   const [vue, setVue] = useState(lireVue);
   const defilement = useDefilement(`individus.${vue}`, individus.length > 0);
@@ -145,7 +147,17 @@ export function Individus() {
 
   const { nom: nomDistinct, libelle } = useNoms();
   // Le nom distinctif permet aussi de chercher « Veillon Denault » ou « l'aîné ».
-  const filtres = individus.filter((i) => !recherche || sansAccents(`${nomDistinct(i)} ${i.prenoms ?? ""} ${i.nom ?? ""}`).includes(sansAccents(recherche)));
+  // Le mode phonétique élargit aux graphies anciennes (Tassier ≈ Tessier) ;
+  // c'est une aide à la recherche, jamais une preuve d'identité (H0 conservée).
+  const cleRecherche = phonetique ? clePhonetique(recherche.split(/\s+/)[0] ?? "") : "";
+  const filtres = individus.filter((i) => {
+    if (!recherche) return true;
+    const texte = sansAccents(`${nomDistinct(i)} ${i.prenoms ?? ""} ${i.nom ?? ""}`);
+    if (texte.includes(sansAccents(recherche))) return true;
+    if (!phonetique || !cleRecherche) return false;
+    const cle = clePhonetique(i.nom, i.prenoms);
+    return cle === cleRecherche || cle.includes(cleRecherche);
+  });
   // Relevés à rattacher : nom et prénoms (écrits ou normalisés) et titre du document ; tous les mots doivent y être.
   const mots = sansAccents(recherche).split(/\s+/).filter(Boolean);
   const relevesFiltres = aRattacher.filter((r) => {
@@ -169,13 +181,34 @@ export function Individus() {
         </Button>
       </Group>
 
-      <TextInput
-        w={{ base: "100%", sm: 320 }}
-        placeholder={ongletPage === "a-rattacher" ? "Nom, prénoms ou document" : ongletPage === "doutes" ? "Nom de l'une des deux fiches" : "Rechercher un nom"}
-        leftSection={<IconSearch size={16} />}
-        value={recherche}
-        onChange={(e) => setRecherche(e.currentTarget.value)}
-      />
+      {individus.length > 500 && (
+        <Paper withBorder p="sm" bg="var(--t-fond-alerte)">
+          <Group gap="xs" wrap="nowrap">
+            <IconAlertTriangle size={18} />
+            <Text size="sm">
+              <b>{individus.length} fiches</b> sont chargées. Préférez la recherche et les filtres au défilement intégral ;
+              les 653 ancêtres non raccordés restent en grade C3 et ne sont jamais promus automatiquement.
+            </Text>
+          </Group>
+        </Paper>
+      )}
+
+      <Group gap="md" align="center">
+        <TextInput
+          w={{ base: "100%", sm: 320 }}
+          placeholder={ongletPage === "a-rattacher" ? "Nom, prénoms ou document" : ongletPage === "doutes" ? "Nom de l'une des deux fiches" : "Rechercher un nom"}
+          leftSection={<IconSearch size={16} />}
+          value={recherche}
+          onChange={(e) => setRecherche(e.currentTarget.value)}
+        />
+        <Tooltip label="Graphies anciennes : Tassier ≈ Tessier. Aide à la recherche, pas une preuve d'identité.">
+          <Switch
+            label="Phonétique"
+            checked={phonetique}
+            onChange={(e) => setPhonetique(e.currentTarget.checked)}
+          />
+        </Tooltip>
+      </Group>
 
       <Tabs value={ongletPage} onChange={setOngletPage} style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
         <Tabs.List>

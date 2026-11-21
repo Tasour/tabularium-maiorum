@@ -234,3 +234,10 @@ export async function donneesArbre() {
   return { personnes, filiations, couples };
 }
 export type DonneesArbre = Awaited<ReturnType<typeof donneesArbre>>;
+
+/** Degré de parenté (plus court chemin non orienté) entre deux fiches. Aide à la lecture, pas une preuve. */
+export async function degreParent(a: string, b: string): Promise<number | null> {
+  const liens = await db.select({ enfantId: filiation.enfantId, parentId: filiation.parentId }).from(filiation);
+  const { degreParent: calculer } = await import("../lib/parente");
+  return calculer(a, b, liens);
+}

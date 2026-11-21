@@ -24,7 +24,7 @@ export type Droit = "lecture" | "ecriture";
 /** Fonctions qui ne modifient rien. Toute autre fonction exposée exige le droit d'écriture. */
 const LECTURE = new Set([
   "listeActes", "chargerActe", "voisinsDansLaLiasse", "annotationsPages", "listeSources",
-  "listeIndividus", "chargerIndividu", "donneesArbre",
+  "listeIndividus", "chargerIndividu", "donneesArbre", "degreParent",
   "listeLieux", "usagesLieux", "rattachementsLieu",
   "listePhotos", "photosIndividu",
   "recherchesIndividu", "toutesRecherches", "sourcesEtConsultations", "chargerSource",

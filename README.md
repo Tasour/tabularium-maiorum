@@ -84,6 +84,14 @@ et ses modifications restent sous AGPL s'ils sont publiés.
 
 Scripts idempotents : `completer-fiches.ts`, `importer-urls-sources.ts`, `ajouter-antoine-meunier.ts`.
 
+### Quick wins d'ergonomie
+
+- **Bandeau de charge** sur la liste des individus au-delà de 500 fiches, avec rappel H0/C3.
+- **Recherche phonétique** (interrupteur « Phonétique ») : `Tassier ≈ Tessier`. Aide à la
+  recherche uniquement — deux noms proches restent des homonymes possibles, jamais une preuve.
+- **Degré de parenté** : `degreParent(a, b)` calcule le plus court chemin non orienté dans la
+  filiation (RPC lecture seule). Outil de lecture, pas une preuve de certitude des liens.
+
 Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 `bun scripts/geolocaliser-lieux.ts` (une seule fois).
 
@@ -112,7 +120,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 242 tests, 0 skippé
+bun test                               # 254 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
