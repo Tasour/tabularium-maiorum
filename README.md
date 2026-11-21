@@ -69,6 +69,21 @@ et ses modifications restent sous AGPL s'ils sont publiés.
   coordonnées (nom ambigu ou « à confirmer ») — aucune approximation. L'app reste utilisable
   sans réseau.
 
+### Complétions P1 (21/11/2026)
+
+- **E160/E161** citent désormais l'API publique du fichier des décès (matchID/INSEE, grade **B1**,
+  consultée le 21/11/2026). Elle corrobore Léon-Félicien (1896 Anor → 1980 Maubeuge) et ne trouve
+  aucun « Alceste Reymond » comme prénom principal — mais le fichier ne couvre que **1970+** :
+  silence documentaire d'accès, **pas** une preuve négative. Les deux enquêtes restent `en_cours`.
+- **Décès d'Arlette Hélène** complété (24/01/2022, Cousolre) depuis `ENQUETE-109.md` (B1), uniquement
+  parce que le champ était vide ; aucune autre fiche n'a été déduite.
+- **15 URL d'archives** promues en objets `source` (19 au total) ; 22 profils/annuaires personnels
+  exclus (RGPD).
+- **Antoine Joseph Meunier**, nommé « père de l'épouse » dans l'acte de 1889, est créé en fiche
+  **C3 non raccordée** avec une filiation `hypothetique` : non promu au noyau A1 sans verdict.
+
+Scripts idempotents : `completer-fiches.ts`, `importer-urls-sources.ts`, `ajouter-antoine-meunier.ts`.
+
 Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 `bun scripts/geolocaliser-lieux.ts` (une seule fois).
 
@@ -97,7 +112,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 237 tests, 0 skippé
+bun test                               # 242 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

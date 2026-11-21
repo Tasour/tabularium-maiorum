@@ -34,13 +34,14 @@ Hypothèses auxiliaires, explicitement **non** des faits : le nom complet « Jea
 | S6 | `ENQUETE-99.md` — tradition « père de Jean Reymond chef d'orchestre à Chambéry » | Rapport local | 19/11/2026 | **C3 maintenu** | **Prouve** qu'une autre tradition sur le même ascendant reste non documentée, H0 conservée. **Ne prouve pas** qu'Alceste soit ce père. |
 | S7 | Recherche publique complémentaire (21/11/2026) | `tools.veille.search` — « cimetière Chambéry Reymond Alceste sépulture registre » | 21/11/2026 | **—** (échec de découverte) | **Aucun résultat**. Aucune affirmation tirée de ce silence ; **non vérifié**, pas une preuve négative. |
 | S8 | `ENQUETE-97.md`/`26.md` — Robert François Reymond (1941-1973), frère présumé | Rapports locaux | 19/11/2026 | **C3** | **Prouve** l'existence d'un homonyme/candidat au rang de frère, non établi. **Ne prouve pas** la parenté avec Jean ni l'identité du père. |
+| S9 | Fichier des personnes décédées (matchID / INSEE), API publique `deces.matchid.io/deces/api/v1/search` | `?lastName=REYMOND&firstName=Alceste` — **146 entrées**, aucune avec « Alceste » comme prénom principal ; seul `Jean Alceste Alfred Reymond` (21/04/1936 Chambéry – 02/11/2023 Jacob-Bellecombette) porte Alceste en 2ᵉ prénom | 21/11/2026 | **B1** (base dérivée, consultée via son API publique) | **Confirme** l'identité et les dates de S2. **Ne confirme aucun ascendant nommé Alceste** : le fichier INSEE débute en **1970**, donc l'absence d'un « Alceste Reymond » décédé avant 1970 est un **silence documentaire d'accès**, pas une preuve négative. Aucune sépulture ni cote n'est produite par cette source. |
 
 Sources écartées : aucune adresse, téléphone, courriel ni donnée de contact personnelle n'a été collecté ou reproduit. Aucun accès payant ou authentifié tenté. Aucune cote de registre de sépulture n'est supposée.
 
 ## Résultat
 
 - **`trouvé`** — l'**indication du détenteur** (S0, réservée), la **cote confirmée** de l'acte de naissance (S1), l'**identité de Jean** (S2-S3) et le **cadre d'accès** aux archives de Savoie (S5). Ce sont des repères, **pas la filiation**.
-- **`non trouvé`** — le **nom d'Alceste comme ascendant nominatif** : ni l'acte `3E 4265` (non lu), ni un registre de sépulture (non localisé), ni une source publique consultable (S4, S5, S7). Aucun degré de parenté (père ou grand-père) n'est établi, aucune date d'inhumation, aucune cote.
+- **`non trouvé`** — le **nom d'Alceste comme ascendant nominatif** : ni l'acte `3E 4265` (non lu), ni un registre de sépulture (non localisé), ni une source publique consultable (S4, S5, S7). Le fichier des décès (S9) ne contient aucun « Alceste Reymond » comme prénom principal, mais il ne couvre que 1970+ : **silence d'accès**, non preuve négative. Aucun degré de parenté (père ou grand-père) n'est établi, aucune date d'inhumation, aucune cote.
 - **`hypothèse`** — H1 et H2 restent deux lectures possibles de S0, non tranchées ; H0 conservée, H3 retenue.
 - **Conclusion : non trouvé — H0 conservée, H3 retenue.** « Non trouvé » plutôt qu'une approximation. Le graphe n'est pas modifié : `tas-jean` reste sans parents établis, et aucun « Alceste » n'est créé comme individu.
 
