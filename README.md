@@ -84,6 +84,18 @@ et ses modifications restent sous AGPL s'ils sont publiés.
 
 Scripts idempotents : `completer-fiches.ts`, `importer-urls-sources.ts`, `ajouter-antoine-meunier.ts`.
 
+### Complétion des individus (21/11/2026)
+
+Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniquement à partir de faits déjà présents dans la base** (relevés d'actes A1) et de règles de qualité.
+
+- Sexe : 9 anciennes valeurs `f` normalisées en `F`, 5 complétées depuis le sexe relevé dans l'acte (total **15 fiches** renseignées).
+- Dates exactes issues des actes : Firmin `1866-09-25`, Aline `1869-02-19`, décès de Philomène `1879-04-06` ; l'ancienne valeur reste en notes.
+- Lieux : Firmin « Thiérache (à préciser) » → **Anor**, Aline → **Mons en Hainaut** (lieu créé, non géolocalisé), décès de Philomène → **Anor**.
+- Professions : Firmin « verrier », Aline « ménagère » (actes 1889/1896).
+- 32 ancêtres anonymes `? ?` reçoivent le qualificatif **« À identifier »**.
+- 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
+- Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
+
 ### Correction des doublons possibles (21/11/2026)
 
 Le tableau de bord affichait **1 465 doublons possibles**. Cause racine : le champ Geneanet `d`
@@ -136,7 +148,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 266 tests, 0 skippé
+bun test                               # 272 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
