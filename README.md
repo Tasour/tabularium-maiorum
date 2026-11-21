@@ -96,6 +96,20 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Classification des recherches et reconstruction depuis Vincent (21/11/2026)
+
+- Nouveau statut **`intervention_humaine`** (label « Intervention humaine », orange) : une recherche
+  explorée suffisamment (≥ 2 sources gradées + test discriminant) mais dont il reste une action non
+  automatisable — copie d'acte, lecture visuelle d'un manuscrit, relevé de cote, décision H0. Ce statut
+  **ne clôt pas** `termineLe` : c'est une attente, pas une fin.
+- `abandonne` existe déjà ; il n'est attribué que si le rapport dit explicitement qu'il n'y a plus
+  d'action, avec motif écrit. Les cas ambigus restent en `intervention_humaine`.
+- Les **161 enquêtes** sont classées : **151 intervention humaine**, **8 en cours** (garde non
+  satisfaite), **2 trouvé**, **0 abandonné**. Journal auditable : `docs/classification-recherches.md`.
+- L'onglet « Recherches » affiche le nouveau statut (filtre dédié + inclus dans « En cours et à faire »).
+- **`docs/reconstruction-vincent.md`** : chaîne Sosa de Vincent sur 9 générations, 8 ascendants sans
+  parents, 5 liens hypothétiques, enquêtes responsables et actions humaines restantes. Aucun C3 promu.
+
 ### Dernière tranche (21/11/2026)
 
 - **Cousolre (59)** géolocalisée via `geo.api.gouv.fr` (correspondance exacte, code 59157) ; 6 lieux
@@ -160,7 +174,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 272 tests, 0 skippé
+bun test                               # 287 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

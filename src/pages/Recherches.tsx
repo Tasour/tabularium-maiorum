@@ -27,7 +27,8 @@ export function Recherches() {
   const correspond = (s: string) => !texte || sansAccents(s).includes(sansAccents(texte));
   const liste = recherches.filter(
     (r) =>
-      (filtre === "toutes" || (filtre === "ouvertes" ? r.statut === "a_faire" || r.statut === "en_cours" : r.statut === filtre)) &&
+      (filtre === "toutes" ||
+        (filtre === "ouvertes" ? ["a_faire", "en_cours", "intervention_humaine"].includes(r.statut) : r.statut === filtre)) &&
       correspond(`${r.titre} ${r.description ?? ""} ${r.individuNom ?? ""} ${r.individuPrenoms ?? ""}`),
   );
   const sourcesConsultees = sources.filter(
@@ -58,6 +59,7 @@ export function Recherches() {
             onChange={setFiltre}
             data={[
               { value: "ouvertes", label: "En cours et à faire" },
+              { value: "intervention_humaine", label: "Intervention humaine" },
               ...STATUTS_RECHERCHE.filter((s) => s.value === "trouve" || s.value === "abandonne").map((s) => ({ value: s.value, label: s.label })),
               { value: "toutes", label: "Toutes" },
             ]}

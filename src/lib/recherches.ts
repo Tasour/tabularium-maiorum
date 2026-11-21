@@ -11,6 +11,7 @@ export const STATUTS_RECHERCHE = [
   { value: "a_faire", label: "À faire", couleur: "gray" },
   { value: "en_cours", label: "En cours", couleur: "blue" },
   { value: "trouve", label: "Trouvé", couleur: "teal" },
+  { value: "intervention_humaine", label: "Intervention humaine", couleur: "orange" },
   { value: "abandonne", label: "Abandonné", couleur: "dark" },
 ];
 
