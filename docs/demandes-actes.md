@@ -25,8 +25,8 @@
 
 ## Mairie de Maubeuge — état civil
 
-- **Acte de décès d'Élie Tassier, 28/02/1997, Maubeuge** — cote : numéro d'acte à demander · rapports : ENQUETE-162.md · Indice B1 à confirmer par l'acte (acte non consulté)
-- **Acte de décès d'Emmanuel Tassier, 2000, Maubeuge** — cote : numéro d'acte à demander · rapports : ENQUETE-162.md · Seule l'année est connue (B1) — aucun jour inventé
+- **Acte de décès d'Élie Tassier, 28/02/1997, Maubeuge** — repère : **acte n°00153** (B1, ENQUETE-166) — numéro d'acte, **pas une cote** · rapports : ENQUETE-162.md, ENQUETE-166.md · Acte non consulté
+- **Acte de décès d'Emmanuel Tassier, 04/02/2000, Maubeuge** — repère : **acte n°102** (B1, ENQUETE-166) — numéro d'acte, **pas une cote** · rapports : ENQUETE-162.md, ENQUETE-166.md · Jour lu dans la capture INSEE, acte non consulté
 - **Acte de mariage Jean Félicien Tassier × Hélène Lamarque, janvier 1923** — cote : à relever · rapports : ENQUETE-160.md · Mention marginale de l'acte de 1925
 
 ## Mairie de Gières — état civil

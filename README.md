@@ -96,6 +96,16 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Repères d'actes du Nord (21/11/2026, E166)
+
+Les 17 643 px de la capture Acte-Décès.fr lus en 7 bandes. **Grade B1** (dérivé INSEE, même fonds que
+morts.fr et GénéaFrance — aucun gain de grade au recoupement). Apports :
+
+- **Emmanuel** : le jour manquant est retrouvé → **04/02/2000**, acte n°**102** (l'année seule était en base) ;
+- repères de numéros d'actes en notes : Élie n°**00153**, Arlette Hélène n°**5**, Léon Félicien n°**233**,
+  Élisée n°**19**, pistes Denain n°**112** et **188**. Ces numéros sont des **repères de demande**,
+  explicitement « pas une cote », jamais des preuves d'identité (H0 conservée).
+
 ### Conformité de l'import PZ (21/11/2026, E164)
 
 Les **17 437 px** de la capture Geneanet « Familles de Thiérache » ont été lus en **7 bandes de
@@ -273,7 +283,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 359 tests, 0 skippé
+bun test                               # 363 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```
