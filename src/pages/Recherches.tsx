@@ -13,6 +13,7 @@ import { useEcran } from "../lib/ecran";
 const dateFr = (iso: string | null) =>
   iso ? new Date(`${iso.slice(0, 10)}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }) : "";
 const sansAccents = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+import { filtrerRecherches, libellesFiltres } from "../lib/filtre-recherches";
 
 export function Recherches() {
   const { telephone } = useEcran();
@@ -25,12 +26,8 @@ export function Recherches() {
   const [ongletPage, setOngletPage] = useMemoire<string | null>("recherches.onglet", "recherches");
 
   const correspond = (s: string) => !texte || sansAccents(s).includes(sansAccents(texte));
-  const liste = recherches.filter(
-    (r) =>
-      (filtre === "toutes" ||
-        (filtre === "ouvertes" ? ["a_faire", "en_cours", "intervention_humaine"].includes(r.statut) : r.statut === filtre)) &&
-      correspond(`${r.titre} ${r.description ?? ""} ${r.individuNom ?? ""} ${r.individuPrenoms ?? ""}`),
-  );
+  const liste = filtrerRecherches(recherches, filtre, texte, sansAccents);
+  const libelles = libellesFiltres(recherches);
   const sourcesConsultees = sources.filter(
     (s) => s.consultations.length > 0 && correspond(`${s.titre} ${s.lieuNom ?? ""} ${s.cote ?? ""} ${s.typeRegistre ?? ""}`),
   );
@@ -57,12 +54,7 @@ export function Recherches() {
             w="fit-content"
             value={filtre}
             onChange={setFiltre}
-            data={[
-              { value: "ouvertes", label: "En cours et à faire" },
-              { value: "intervention_humaine", label: "Intervention humaine" },
-              ...STATUTS_RECHERCHE.filter((s) => s.value === "trouve" || s.value === "abandonne").map((s) => ({ value: s.value, label: s.label })),
-              { value: "toutes", label: "Toutes" },
-            ]}
+            data={libelles}
           />
           <ScrollArea flex={1}>
             {liste.length === 0 ? (
