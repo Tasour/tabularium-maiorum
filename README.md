@@ -96,6 +96,22 @@ Script idempotent `scripts/enrichir-individus.ts` : complète les fiches **uniqu
 - 111 PZ sans date portent la mention explicite « aucune date connue dans la source » ; 7 lieux sans coordonnées portent « coordonnées non vérifiées ».
 - Aucune promotion C3, aucun sexe/lieu/profession deviné pour les PZ (la source Geneanet ne les contient pas).
 
+### Captures de sources publiques (21/11/2026)
+
+Six captures de Geneanet, MyHeritage, morts.fr, Acte-Décès.fr et GénéaFrance sont archivées dans
+`preuves/screens-sources-2026-11-21/` avec SHA-256 (`data/preuves-sources.json`, script idempotent
+`enregistrer-captures.ts`). **ENQUETE-162.md** documente le croisement.
+
+- **Grade B1** pour les sources dérivées du fichier INSEE ; **C3** pour Geneanet/MyHeritage.
+- **Règle essentielle** : morts.fr, Acte-Décès.fr et GénéaFrance puisent dans le **même fonds INSEE** —
+  les recouper n'augmente **pas** le grade.
+- Décès comblés : **Élie † 28/02/1997 Maubeuge**, **Emmanuel † 2000 Maubeuge** (B1, acte non consulté,
+  mention explicite en notes ; aucune journée inventée pour Emmanuel).
+- Deux **Tassier de Denain** (Alain Léonard 1932-2001, Joséphine Alina Marie 1906-1980) créés en **C3
+  non raccordés** : aucun lien de parenté, aucun doute absurde (leurs dates excluent Firmin et Pierre Joseph).
+- MyHeritage : 75 documents « Léon Tassier » aux champs vides — homonymes non identifiés, rien promu.
+- H0 conservée, 0 C3 promu, 0 lien déduit d'un décès.
+
 ### Vue d'ascendance Sosa (21/11/2026)
 
 - Nouvelle page **« Ascendance »** (menu latéral) : numérotation Sosa-Stradonitz depuis
@@ -185,7 +201,7 @@ Commandes : `bun scripts/enrichir-tassier.ts` (idempotent) puis
 bun install
 bun scripts/import-tassier.ts          # idempotent, écrit dans ./data
 bun scripts/enrichir-tassier.ts        # idempotent, rapports + relevés + rigueur
-bun test                               # 301 tests, 0 skippé
+bun test                               # 311 tests, 0 skippé
 bun run type-check
 bun run local                          # http://localhost:3210
 ```

@@ -1,4 +1,4 @@
-/* Classification des 161 enquêtes : tous les statuts et l'idempotence. */
+/* Classification des 162 enquêtes : tous les statuts et l'idempotence. */
 import { expect, test } from "bun:test";
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -17,11 +17,11 @@ for (const script of ["import-tassier.ts", "enrichir-tassier.ts", "classer-reche
 }
 ouvrirBase(join(DOSSIER, "donnees.db"), join(racine, "drizzle"));
 
-test("161 tâches classées : 158 intervention humaine, 1 en cours, 2 trouvé", async () => {
+test("162 tâches classées : 159 intervention humaine, 1 en cours, 2 trouvé", async () => {
   const taches = await db.select().from(tache);
-  expect(taches.length).toBe(161);
+  expect(taches.length).toBe(162);
   const compte = (s: string) => taches.filter((t) => t.statut === s).length;
-  expect(compte("intervention_humaine")).toBe(158);
+  expect(compte("intervention_humaine")).toBe(159);
   expect(compte("en_cours")).toBe(1);
   expect(compte("trouve")).toBe(2);
   expect(compte("abandonne")).toBe(0);

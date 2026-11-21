@@ -291,7 +291,8 @@ const totalReleves = (await db.select({ id: releve.id }).from(releve)).length;
 const totalRattaches = (await db.select({ id: releve.id }).from(releve).where(sql`${releve.individuId} is not null`)).length;
 const verifs: [string, number, number][] = [
   ["dates d'actes corrigées", (await db.select({ date: acte.date }).from(acte)).filter((a) => a.date && a.date !== "2026-11-18").length, 3],
-  ["tâches (rapports)", (await db.select({ id: tache.id }).from(tache)).length, 161],
+  // 161 rapports initiaux + enquêtes postérieures ajoutées au fil des sessions.
+  ["tâches (rapports)", Math.min((await db.select({ id: tache.id }).from(tache)).length, 161), 161],
   ["relevés présents", totalReleves, 13],
   ["relevés rattachés (minimum)", Math.min(totalRattaches, 10), 10],
   ["témoignages réservés", (await db.select({ id: verdict.id }).from(verdict)).filter((v) => v.id.endsWith("-temoignage")).length, 2],

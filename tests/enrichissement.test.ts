@@ -25,7 +25,7 @@ ouvrirBase(join(DOSSIER, "donnees.db"), join(racine, "drizzle"));
 
 test("161 rapports importés comme tâches, dont 122 absents de l'ancien index", async () => {
   const taches = await db.select().from(tache);
-  expect(taches.length).toBe(161);
+  expect(taches.length).toBe(162);
   expect(taches.some((t) => t.id === "tas-tache-E31")).toBe(true);
   expect(taches.some((t) => t.id === "tas-tache-E150")).toBe(true);
   const rapport = taches.find((t) => t.id === "tas-tache-E31")!;

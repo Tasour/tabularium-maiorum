@@ -46,9 +46,9 @@ export function classerRapport(texte: string): Classification {
   }
   const action = section(texte, /prochaine action/i).trim();
   if (ABANDON.test(action)) {
-    return { categorie: "abandonne", motif: `Aucune action concrète restante selon la section « Prochaine action » du rapport : ${action.slice(0, 160)}` };
+    return { categorie: "abandonne", motif: `Aucune action concrète restante selon la section « Prochaine action » du rapport : ${action.slice(0, 160).trimEnd()}` };
   }
   const premiere = action.split("\n").map((l) => l.trim()).find((l) => l && !/^[-*]$/.test(l)) ?? "";
-  const extrait = premiere.replace(/^\d+[.)]\s*/, "").slice(0, 180) || "action non détaillée dans le rapport";
+  const extrait = premiere.replace(/^\d+[.)]\s*/, "").slice(0, 180).trimEnd() || "action non détaillée dans le rapport";
   return { categorie: "intervention_humaine", motif: `Action non automatisable restante : ${extrait}` };
 }
